@@ -1,0 +1,33 @@
+div {
+  width: 75%;
+  border-style: solid;
+  border-width: 8px;
+  border-color: black white yellow red;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  padding: 50px;
+  border-radius: 5px;
+}
+h1 {
+  color:white;
+  text-align: center;
+  font-size: 100px;
+  position: relative;
+  top: -50px;
+}
+p {
+  color:white;
+  text-align: center;
+  font-size: 50px;
+  position: relative;
+  top: -50px
+}
+body {
+  background-image: url(https://i.pinimg.com/736x/22/8d/7e/228d7edeb2926d73678a7dbfe21efab1.jpg);
+  background-size: cover;
+}
+a {
+  color: white;
+  font-size: 20px;
+}
