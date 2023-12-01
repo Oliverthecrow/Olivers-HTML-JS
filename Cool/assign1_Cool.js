@@ -13,6 +13,7 @@ function setup() {
     let sketch = createCanvas(1920, 950);
     sketch.parent("mycanvas");
     name = window.prompt("What is your name?");
+    textFont('Courier New')
 }
 function preload() {
     BG = loadImage("./coolnessBG.jpg");
@@ -45,20 +46,23 @@ function draw() {
     }
 
     textSize(35)
-    text(name + ", your coolness™ score is " + score, 1300, 600);
-    text("Click ? to check your rank", 1300, 650);
+    text(name + ", your coolness™ score is " + score, 1200, 600);
+    text("Click ? to check your rank", 1200, 650);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
-            text(name + " your rank is " + ranking + "\n100%, good job! Your cool", 1300, 700)
-            text("Click ! to retake test", 1300, 785)
+            text(name + " your rank is " + ranking + "\n100%, good job! Your cool", 1200, 700)
+            text("Click ! to retake test", 1200, 785)
         }
         else {
-            text(name + " your rank is " + ranking, 1300, 700);
-            text("Click ! to retake test", 1300, 750)
+            text(name + " your rank is " + ranking, 1200, 700);
+            text("Click ! to retake test", 1200, 750)
+            textSize(10);
+            text("(only works if all questions are done)", 1660,745)
         }
     }
 }
 function keyPressed() {
+    // correct answers for test
     if (key === "q" && Q1ANS === false) {
         score++
     }
@@ -77,6 +81,7 @@ function keyPressed() {
     else if (key === "f" && Q5ANS === false) {
         score++
     }
+    // to check test score
     else if (key === "?") {
         scoreCheck = true
         if (score >= 6) {
@@ -92,6 +97,7 @@ function keyPressed() {
     if (Q1ANS === true && Q2ANS === true && Q3ANS === true && Q4ANS === true && Q5ANS === true && scoreCheck === true) {
         testFinished = true
     }
+    // resets variables to default
     if (testFinished === true) {
         if (key === "!") {
             Q1ANS = false;
@@ -104,7 +110,8 @@ function keyPressed() {
             score = 0;
             ranking = "";
         }
-    }
+    } 
+    //checks to see if a question has been asnwered
     if (key === "q" || key === "w" || key === "e") {
         Q1ANS = true;
     }
