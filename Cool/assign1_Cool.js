@@ -20,9 +20,9 @@ let Q2 = "Question 2: What animal out of the the choices is your favourite? \n r
 let Q3 = "Question 3: How many hours in Satisfactory do you have \n u) What is that?    i) >2     o) <2";
 let Q4 = "Question 4: Favourite subject in school \n p) Math     a) L.A     s) Social";
 let Q5 = "Question 5: What is 9 + 10 \n d) 19     f) 21     g) 90";
-let green = color(50, 200, 50);
-let red = color(200, 50, 50);
-let blue = color(50, 50, 200);
+let green;
+let red;
+let blue;
 
 function setup() {
     let sketch = createCanvas(1920, 950);
@@ -32,6 +32,9 @@ function setup() {
 }
 function preload() {
     BG = loadImage("./coolnessBG.jpg");
+    green = color(50, 200, 50);
+    red = color(200, 50, 50);
+    blue = color(50, 50, 200);
 }
 function draw() {
     background(BG);
@@ -100,7 +103,7 @@ function draw() {
     if (!Q5Answered) {
         text(Q5, 50, 600);
     }
-    else if (!Q5Correct) {
+    else if (Q5Correct) {
         fill(green);
         text(Q5, 50, 600);
         fill(255);
@@ -115,13 +118,13 @@ function draw() {
     text("Click ? to check your rank", 1200, 650);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
-            text(name + ", your rank is " + ranking + "\n100%, good job! Your cool", 1200, 700);
+            text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", 1200, 700);
             text("Click ! to retake test", 1200, 785);
             textSize(10);
             text("(only works if all questions are done)", 1660, 785);
         }
         else {
-            text(name + " your rank is " + ranking, 1200, 700);
+            text(name + ", your rank is " + ranking, 1200, 700);
             text("Click ! to retake test", 1200, 750);
             textSize(10);
             text("(only works if all questions are done)", 1660, 745);
@@ -150,7 +153,6 @@ function keyPressed() {
         score++;
         Q4Correct = true;
     }
-
     else if (key === "f" && !Q5Answered) {
         score++;
         Q5Correct = true;
