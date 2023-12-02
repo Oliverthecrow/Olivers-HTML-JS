@@ -18,12 +18,11 @@ let Q5Correct = false;
 let Q1 = "Question 1: Do you have own an air fryer? \n q) YES    w) NO    e) I HAVE TWENTY!";
 let Q2 = "Question 2: What animal out of the the choices is your favourite? \n r) Dogs    t) Cats    y) Birds";
 let Q3 = "Question 3: How many hours in Satisfactory do you have \n u) What is that?    i) >2     o) <2";
-let Q4 = "Question 4: Facourite subject in school \n p) Math     a) L.A     s) Social";
+let Q4 = "Question 4: Favourite subject in school \n p) Math     a) L.A     s) Social";
 let Q5 = "Question 5: What is 9 + 10 \n d) 19     f) 21     g) 90";
-let green = (50, 200, 50);
-let red = (200, 50, 50);
-let blue = (50, 50, 200);
-
+let green = color(50, 200, 50);
+let red = color(200, 50, 50);
+let blue = color(50, 50, 200);
 
 function setup() {
     let sketch = createCanvas(1920, 950);
@@ -116,7 +115,7 @@ function draw() {
     text("Click ? to check your rank", 1200, 650);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
-            text(name + " your rank is " + ranking + "\n100%, good job! Your cool", 1200, 700);
+            text(name + ", your rank is " + ranking + "\n100%, good job! Your cool", 1200, 700);
             text("Click ! to retake test", 1200, 785);
             textSize(10);
             text("(only works if all questions are done)", 1660, 785);
@@ -172,7 +171,7 @@ function keyPressed() {
             ranking = "wood";
         }
     }
-    else if (Q1Answered && Q2Answered && Q3Answered && Q4Answered  && Q5Answered  && scoreCheck) {
+    else if (Q1Answered && Q2Answered && Q3Answered && Q4Answered && Q5Answered && scoreCheck) {
         testFinished = true;
     }
     // resets variables to default
