@@ -178,6 +178,13 @@ function keyPressed() {
         testFinished = false;
         score = 0;
         ranking = "";
+        Q1COR = false;
+        Q1COR2 = false;
+        Q2COR = false;
+        Q3COR = false;
+        Q4COR = false;
+        Q5COR = false;
+
     }
     //checks to see if a question has been asnwered
     if (key === "q" || key === "w" || key === "e") {
