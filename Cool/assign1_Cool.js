@@ -114,20 +114,20 @@ function draw() {
     }
 
     textSize(35)
-    text(name + ", your coolness™ score is " + score, 1200, 600);
-    text("Click ? to check your rank", 1200, 650);
+    text(name + ", your coolness™ score is " + score, 1000, 500);
+    text("Click ? to check your rank", 1000, 550);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
-            text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", 1200, 700);
-            text("Click ! to retake test", 1200, 785);
-            textSize(10);
-            text("(only works if all questions are done)", 1660, 785);
+            text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", 1000, 600);
+            text("Click ! to retake test", 1000, 700);
+            textSize(12);
+            text("(only works if all questions are done)", 1465, 695);
         }
         else {
-            text(name + ", your rank is " + ranking, 1200, 700);
-            text("Click ! to retake test", 1200, 750);
-            textSize(10);
-            text("(only works if all questions are done)", 1660, 745);
+            text(name + ", your rank is " + ranking, 1000, 600);
+            text("Click ! to retake test", 1000, 650);
+            textSize(12);
+            text("(only works if all questions are done)", 1465, 645);
         }
     }
 }
