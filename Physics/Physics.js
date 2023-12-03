@@ -27,7 +27,7 @@ function draw() {
     background(30);
     image(skuna, ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
-        ball.vy += Math.round(1000 * gravity) / 1000;
+        ball.vy += gravity;
         if (ball.vx >= 0) {
             ball.vx -= friction;
         }
