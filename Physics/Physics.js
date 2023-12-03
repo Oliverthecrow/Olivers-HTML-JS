@@ -24,7 +24,7 @@ function preload() {
     skuna = loadImage("terror.png");
 }
 function draw() {
-    background(18);
+    background(30);
     image(skuna, ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
         ball.vy += Math.round(1000 * gravity) / 1000;
@@ -38,7 +38,7 @@ function draw() {
             ball.vy += friction;
         }
         if (ball.vy >= 0) {
-            ball.vy - + friction;
+            ball.vy -= friction;
         }
     }
     ball.Y += ball.vy;
