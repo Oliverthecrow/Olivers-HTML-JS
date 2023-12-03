@@ -2,6 +2,7 @@ let mouseheld = false;
 let actionMade = false;
 
 let selected_ball = 0;
+let ballIMG;
 
 let lineXlength = 0;
 let lineYlength = 0;
