@@ -17,7 +17,7 @@ let ball = {
 function setup() {
     let sketch = createCanvas(window.innerWidth, window.innerHeight);
     sketch.parent("PhysicsCanvas");
-    strokeWeight(0.5)
+    strokeWeight(0.5);
     stroke(255);
 }
 function preload() {
@@ -29,31 +29,36 @@ function draw() {
     if (actionMade && !mouseheld) {
         ball.vy += gravity;
         if(ball.vx > 0) {
-            ball.vx -= friction
+            ball.vx -= friction;
         }
         if (ball.vx < 0) {
-            ball.vx += friction
+            ball.vx += friction;
         }
     }
     ball.Y += ball.vy;
     ball.X += ball.vx;
     bounds()
     if (mouseheld) {
+        stroke(50);
+        strokeWeight(2);
         line(ball.X, ball.Y, mouseX, mouseY);
+        circle(mouseX,mouseY,5);
     }
+    stroke(255);
+    strokeWeight(0.5);
     textSize(18);
     fill(130, 200, 255);
     text("Physics Simulation", 5, 100);
-    text("Click and drag the fact to launch it.", 5, 140)
-    text("Click + or - to respectively change gravity.", 5, 180)
-    text("Click S to increase speed from launch, click L to lower speed. Click W for warp speed", 5, 260)
-    text("Click F to increase friction and f to lower it",5,340)
-    text("Click R to reset everything back to normal", 5, 420)
+    text("Click and drag the fact to launch it.", 5, 140);
+    text("Click + or - to respectively change gravity.", 5, 180);
+    text("Click S to increase speed from launch, click L to lower speed. Click W for warp speed", 5, 260);
+    text("Click F to increase friction and f to lower it",5,340);
+    text("Click R to reset everything back to normal", 5, 420);
 
     textSize(22)
-    text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220)
-    text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".",5, 300)
-    text("Friction: " + Math.round(1000* friction) / 1000 + ".",5,380)
+    text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
+    text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".",5, 300);
+    text("Friction: " + Math.round(1000* friction) / 1000 + ".",5,380);
 }
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
@@ -91,11 +96,11 @@ function mousePressed() {
 }
 function mouseReleased() {
     if (mouseheld) {
-        lineXlength = mouseX - ball.X
-        lineYlength = mouseY - ball.Y
+        lineXlength = mouseX - ball.X;
+        lineYlength = mouseY - ball.Y;
         mouseheld = false;
-        actionMade = true
-        ball.vx += lineXlength * launchspeed
+        actionMade = true;
+        ball.vx += lineXlength * launchspeed;;
         ball.vy += lineYlength * launchspeed
     }
 }
@@ -104,30 +109,30 @@ function windowResized() {
 }
 function keyPressed() {
     if (key === "+" || key === "=") {
-        gravity += 0.1
+        gravity += 0.1;
     }
     else if (key === "-" || key === "_") {
-        gravity -= 0.1
+        gravity -= 0.1;
     }
     else if (key === "s" || key === "S") {
-        launchspeed += 0.01
+        launchspeed += 0.01;
     }
     else if (key === "l" || key === "L") {
-        launchspeed -= 0.01
+        launchspeed -= 0.01;
     }
     else if (key === "W" || key === "w") {
-        launchspeed = 1000
+        launchspeed = 1000;
     }
     else if (key === "r" || key === "R") {
-        launchspeed = 0.05
-        gravity = 0.5
+        launchspeed = 0.05;
+        gravity = 0.5;
     }
     else if (key === "F") {
-        friction += 0.001
+        friction += 0.001;
     }
     else if(key === "f") {
         if (friction > 0) {
-        friction -= 0.001
+        friction -= 0.001;
         }
     }
 }
