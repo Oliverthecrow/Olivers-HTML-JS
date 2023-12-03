@@ -1,0 +1,43 @@
+ol {
+    position: relative;
+    top: 60px;
+    left: 5px;
+
+    border: 6px;
+    width: 400px;
+    height: 250px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, darkblue, cyan, black) 1;
+    padding: 80px 80px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 3px #292726;
+}
+
+li {
+    margin: 40px 0;
+    position: relative;
+    top: -75px;
+}
+
+div {
+    position: relative;
+    top: -100px;
+}
+
+body {
+    background: url("BG.jpg") no-repeat center center fixed;
+    background-size: cover;
+    width: auto;
+    margin: 20px;
+    font-size: 40px;
+    color: #efe6f0;
+}
+
+h1 {
+    position: relative;
+    top: -40px;
+}
+
+a {
+    color: white
+}
