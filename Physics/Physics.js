@@ -24,7 +24,7 @@ function setup() {
         oliver = loadImage("exposure-Oliver-horror.png"),
         Crunch = loadImage("Cinnamon-Toast-Crunch.png"),
         CloseUpOliver = loadImage("Close-Up-Oliver.png"),
-        CloseUpSkuna = loadImage("CLose-Up-Skuna.png"),
+        CloseUpSkuna = loadImage("Close-Up-Skuna.png"),
     ];
 
     let sketch = createCanvas(window.innerWidth, window.innerHeight);
