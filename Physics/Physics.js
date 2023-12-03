@@ -34,6 +34,12 @@ function draw() {
         if (ball.vx < 0) {
             ball.vx += friction;
         }
+        if (ball.vy < 0) {
+            ball.vy += friction;
+        }
+        if (ball.vy > 0) {
+            ball.vy -+ friction;
+        }
     }
     ball.Y += ball.vy;
     ball.X += ball.vx;
