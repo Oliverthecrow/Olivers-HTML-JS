@@ -49,9 +49,9 @@ function draw() {
     textSize(18);
     fill(130, 200, 255);
     text("Physics Simulation", 5, 100);
-    text("Click and drag the fact to launch it.", 5, 140);
+    text("Click and drag the face to launch it.", 5, 140);
     text("Click + or - to respectively change gravity.", 5, 180);
-    text("Click S to increase speed from launch, click L to lower speed. Click W for warp speed", 5, 260);
+    text("Click S to increase speed of launch, L to lower speed, W for warp speed.", 5, 260);
     text("Click F to increase friction and f to lower it",5,340);
     text("Click R to reset everything back to normal", 5, 420);
 
