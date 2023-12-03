@@ -1,6 +1,8 @@
 let mouseheld = false;
 let actionMade = false;
 
+let lasthitsurface = "";
+
 let selected_ball = 0;
 let ballIMG;
 
@@ -79,7 +81,9 @@ function draw() {
     text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", 5, 300);
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", 5, 380);
 
-    print(ball.vx)
+    if (selected_ball >= ballIMG.length) {
+        selected_ball = 0;
+    }
 }
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
@@ -94,18 +98,28 @@ function bounds() {
     if (ball.Y > window.innerHeight - ball.radius) {
         ball.Y -= ball.vy;
         ball.vy *= -0.75;
+        if (lasthitsurface !== "bottom") {
+        selected_ball ++
+        }
+        lasthitsurface = "bottom"
     }
     if (ball.X > window.innerWidth - ball.radius) {
         ball.X -= ball.vx;
         ball.vx *= -0.75;
+        selected_ball ++
+        lasthitsurface = "right"
     }
     if (ball.X < 0 + ball.radius) {
         ball.X -= ball.vx;
         ball.vx *= -0.75;
+        selected_ball ++
+        lasthitsurface = "left"
     }
     if (ball.Y < 0 + ball.radius) {
         ball.Y -= ball.vy;
         ball.vy *= -0.75;
+        selected_ball ++
+        lasthitsurface = "top"
     }
 }
 function mousePressed() {
@@ -159,8 +173,5 @@ function keyPressed() {
     }
     else if (key === "I" || key === "i") {
         selected_ball++
-        if (selected_ball >= ballIMG.length) {
-            selected_ball = 0;
-        }
     }
 }
