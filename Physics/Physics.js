@@ -132,6 +132,7 @@ function keyPressed() {
     else if (key === "r" || key === "R") {
         launchspeed = 0.05;
         gravity = 0.5;
+        friction = 0.005
     }
     else if (key === "F") {
         friction += 0.001;
