@@ -37,16 +37,19 @@ function draw() {
     image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
         ball.vy += gravity;
-        if (ball.vx >= 0) {
+        if (ball.vx > 0) {
             ball.vx -= friction;
         }
-        if (ball.vx <= 0) {
+        if (ball.vx < 0) {
             ball.vx += friction;
         }
-        if (ball.vy <= 0) {
+        if (ball.vx < friction && ball.vx > 0) {
+            ball.vx = 0 
+        }
+        if (ball.vy < 0) {
             ball.vy += friction;
         }
-        if (ball.vy >= 0) {
+        if (ball.vy > 0) {
             ball.vy -= friction;
         }
     }
@@ -75,6 +78,8 @@ function draw() {
     text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
     text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", 5, 300);
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", 5, 380);
+
+    print(ball.vx)
 }
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
