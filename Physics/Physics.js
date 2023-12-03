@@ -24,21 +24,21 @@ function preload() {
     skuna = loadImage("terror.png");
 }
 function draw() {
-    background(5);
+    background(18);
     image(skuna, ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
-        ball.vy += gravity;
-        if(ball.vx > 0) {
+        ball.vy += Math.round(1000 * gravity) / 1000;
+        if (ball.vx >= 0) {
             ball.vx -= friction;
         }
-        if (ball.vx < 0) {
+        if (ball.vx <= 0) {
             ball.vx += friction;
         }
-        if (ball.vy < 0) {
+        if (ball.vy <= 0) {
             ball.vy += friction;
         }
-        if (ball.vy > 0) {
-            ball.vy -+ friction;
+        if (ball.vy >= 0) {
+            ball.vy - + friction;
         }
     }
     ball.Y += ball.vy;
@@ -48,7 +48,7 @@ function draw() {
         stroke(50);
         strokeWeight(2);
         line(ball.X, ball.Y, mouseX, mouseY);
-        circle(mouseX,mouseY,5);
+        circle(mouseX, mouseY, 5);
     }
     stroke(255);
     strokeWeight(0.5);
@@ -58,13 +58,13 @@ function draw() {
     text("Click and drag the face to launch it.", 5, 140);
     text("Click + or - to respectively change gravity.", 5, 180);
     text("Click S to increase speed of launch, L to lower speed, W for warp speed.", 5, 260);
-    text("Click F to increase friction and f to lower it",5,340);
+    text("Click F to increase friction and f to lower it", 5, 340);
     text("Click R to reset everything back to normal", 5, 420);
 
     textSize(22)
     text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
-    text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".",5, 300);
-    text("Friction: " + Math.round(1000* friction) / 1000 + ".",5,380);
+    text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", 5, 300);
+    text("Friction: " + Math.round(1000 * friction) / 1000 + ".", 5, 380);
 }
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
@@ -136,9 +136,9 @@ function keyPressed() {
     else if (key === "F") {
         friction += 0.001;
     }
-    else if(key === "f") {
+    else if (key === "f") {
         if (friction > 0) {
-        friction -= 0.001;
+            friction -= 0.001;
         }
     }
 }
