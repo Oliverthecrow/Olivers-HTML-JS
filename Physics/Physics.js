@@ -118,7 +118,9 @@ function bounds() {
     if (ball.Y < 0 + ball.radius) {
         ball.Y -= ball.vy;
         ball.vy *= -0.75;
-        selected_ball ++
+        if (lasthitsurface !== "top") {
+            selected_ball ++
+            }
         lasthitsurface = "top"
     }
 }
