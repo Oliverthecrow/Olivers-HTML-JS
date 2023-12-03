@@ -1,12 +1,16 @@
 let mouseheld = false;
-let skuna;
-let shape;
 let actionMade = false;
+
+let shape;
+let selected_ball = 0;
+
 let lineXlength = 0;
 let lineYlength = 0;
+
 let gravity = 0.5;
 let launchspeed = 0.05;
-let friction = 0.005;
+let friction = 0.07;
+
 let ball = {
     X: 900,
     Y: 475,
@@ -15,17 +19,22 @@ let ball = {
     vy: 0,
 }
 function setup() {
+    ballIMG = [
+        terror = loadImage("terror.png"),
+        oliver = loadImage("exposure-Oliver-horror.png"),
+        Crunch = loadImage("Cinnamon-Toast-Crunch.png"),
+        CloseUpOliver = loadImage("Close-Up-Oliver.png"),
+        CloseUpSkuna = loadImage("CLose-Up-Skuna.png"),
+    ];
+
     let sketch = createCanvas(window.innerWidth, window.innerHeight);
     sketch.parent("PhysicsCanvas");
     strokeWeight(0.5);
     stroke(255);
 }
-function preload() {
-    skuna = loadImage("terror.png");
-}
 function draw() {
     background(30);
-    image(skuna, ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
+    image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
         ball.vy += gravity;
         if (ball.vx >= 0) {
@@ -60,6 +69,7 @@ function draw() {
     text("Click S to increase speed of launch, L to lower speed, W for warp speed.", 5, 260);
     text("Click F to increase friction and f to lower it", 5, 340);
     text("Click R to reset everything back to normal", 5, 420);
+    text("Click i to change the ball",5,460)
 
     textSize(22)
     text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
@@ -106,8 +116,8 @@ function mouseReleased() {
         lineYlength = mouseY - ball.Y;
         mouseheld = false;
         actionMade = true;
-        ball.vx += lineXlength * launchspeed;;
-        ball.vy += lineYlength * launchspeed
+        ball.vx += lineXlength * launchspeed;
+        ball.vy += lineYlength * launchspeed;
     }
 }
 function windowResized() {
@@ -132,14 +142,20 @@ function keyPressed() {
     else if (key === "r" || key === "R") {
         launchspeed = 0.05;
         gravity = 0.5;
-        friction = 0.005
+        friction = 0.07
     }
     else if (key === "F") {
-        friction += 0.001;
+        friction += 0.01;
     }
     else if (key === "f") {
         if (friction > 0) {
-            friction -= 0.001;
+            friction -= 0.01;
+        }
+    }
+    else if (key === "I" || key === "i") {
+        selected_ball++
+        if (selected_ball >= ballIMG.length) {
+            selected_ball = 0;
         }
     }
 }
