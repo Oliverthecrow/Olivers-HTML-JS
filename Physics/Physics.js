@@ -46,7 +46,7 @@ function draw() {
             ball.vx += friction;
         }
         if (ball.vx < friction && ball.vx > 0) {
-            ball.vx = 0 
+            ball.vx = 0;
         }
         if (ball.vy < 0) {
             ball.vy += friction;
@@ -74,7 +74,7 @@ function draw() {
     text("Click S to increase speed of launch, L to lower speed, W for warp speed.", 5, 260);
     text("Click F to increase friction and f to lower it", 5, 340);
     text("Click R to reset everything back to normal", 5, 420);
-    text("Click i to change the ball",5,460)
+    text("Click i to change the ball", 5, 460);
 
     textSize(22)
     text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
@@ -99,29 +99,29 @@ function bounds() {
         ball.Y -= ball.vy;
         ball.vy *= -0.75;
         if (lasthitsurface !== "bottom") {
-        selected_ball ++
+            selected_ball++;
         }
-        lasthitsurface = "bottom"
+        lasthitsurface = "bottom";
     }
     if (ball.X > window.innerWidth - ball.radius) {
         ball.X -= ball.vx;
         ball.vx *= -0.75;
-        selected_ball ++
-        lasthitsurface = "right"
+        selected_ball++;
+        lasthitsurface = "right";
     }
     if (ball.X < 0 + ball.radius) {
         ball.X -= ball.vx;
         ball.vx *= -0.75;
-        selected_ball ++
-        lasthitsurface = "left"
+        selected_ball++;
+        lasthitsurface = "left";
     }
     if (ball.Y < 0 + ball.radius) {
         ball.Y -= ball.vy;
         ball.vy *= -0.75;
         if (lasthitsurface !== "top") {
-            selected_ball ++
-            }
-        lasthitsurface = "top"
+            selected_ball++;
+        }
+        lasthitsurface = "top";
     }
 }
 function mousePressed() {
@@ -174,6 +174,9 @@ function keyPressed() {
         }
     }
     else if (key === "I" || key === "i") {
-        selected_ball++
+        selected_ball++;
+        if (selected_ball >= ballIMG.length) {
+            selected_ball = 0;
+        }
     }
 }
