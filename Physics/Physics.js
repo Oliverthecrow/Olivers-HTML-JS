@@ -1,7 +1,6 @@
 let mouseheld = false;
 let actionMade = false;
 
-let shape;
 let selected_ball = 0;
 
 let lineXlength = 0;
