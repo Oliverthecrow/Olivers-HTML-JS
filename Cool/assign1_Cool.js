@@ -25,7 +25,7 @@ let red;
 let blue;
 
 function setup() {
-    let sketch = createCanvas(1920, 950);
+    let sketch = createCanvas(window.innerWidth, window.innerHeight);
     sketch.parent("mycanvas");
     name = window.prompt("What is your name?");
     textFont('Courier New');
@@ -41,7 +41,9 @@ function draw() {
     fill(255);
     stroke(255);
     textSize(50);
-    text("THE COOLNESS TEST", 725, 50);
+    textAlign(CENTER);
+    text("THE COOLNESS TEST", window.innerWidth/2, 50);
+    textAlign(LEFT);
     strokeWeight(5);
     line(0, 65, 2000, 65);
 
@@ -114,20 +116,21 @@ function draw() {
     }
 
     textSize(35)
-    text(name + ", your coolness™ score is " + score, 1000, 500);
-    text("Click ? to check your rank", 1000, 550);
+    textAlign(RIGHT)
+    text(name + ", your coolness™ score is " + score, window.innerWidth - 25, 500);
+    text("Click ? to check your rank", window.innerWidth -25, 550);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
-            text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", 1000, 600);
-            text("Click ! to retake test", 1000, 700);
+            text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", window.innerWidth - 25, 600);
+            text("Click ! to retake test", window.innerWidth - 25, 700);
             textSize(12);
-            text("(only works if all questions are done)", 1465, 695);
+            text("(only works if all questions are done)", window.innerWidth - 25, 720);
         }
         else {
-            text(name + ", your rank is " + ranking, 1000, 600);
-            text("Click ! to retake test", 1000, 650);
+            text(name + ", your rank is " + ranking, window.innerWidth - 25, 600);
+            text("Click ! to retake test", window.innerWidth - 25, 650);
             textSize(12);
-            text("(only works if all questions are done)", 1465, 645);
+            text("(only works if all questions are done)", window.innerWidth - 25, 670);
         }
     }
 }
