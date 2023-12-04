@@ -48,12 +48,17 @@ function draw() {
         if (ball.vx < friction && ball.vx > 0) {
             ball.vx = 0;
         }
+        /* currently aware of a bug with a friction causing some weird stuff to happen with the ball.vy, 
+        currently only an issue when friction is higher than 0.49
+        */
         if (ball.vy < 0) {
             ball.vy += friction;
         }
         if (ball.vy > 0) {
             ball.vy -= friction;
         }
+        print(ball.vx)
+        print(ball.vy)
     }
     ball.Y += ball.vy;
     ball.X += ball.vx;
@@ -66,20 +71,35 @@ function draw() {
     }
     stroke(255);
     strokeWeight(0.5);
-    textSize(18);
     fill(130, 200, 255);
-    text("Physics Simulation", 5, 100);
-    text("Click and drag the face to launch it.", 5, 140);
-    text("Click + or - to respectively change gravity.", 5, 180);
-    text("Click S to increase speed of launch, L to lower speed, W for warp speed.", 5, 260);
-    text("Click F to increase friction and f to lower it", 5, 340);
-    text("Click R to reset everything back to normal", 5, 420);
-    text("Click i to change the ball", 5, 460);
+    textSize(40);
+    textAlign(CENTER);
+    textFont('Courier New');
+    text("Physics Simulation", window.innerWidth / 2, 50);
 
-    textSize(22)
-    text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", 5, 220);
-    text("Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", 5, 300);
-    text("Friction: " + Math.round(1000 * friction) / 1000 + ".", 5, 380);
+    textAlign(LEFT);
+    textSize(20);
+    text("Click and drag the face to launch it.", 10, 100);
+    text("+ or - for gravity.", 10, 140);
+    text("S to speed up launch, L to lower it, and W for speed", 10, 180);
+    text("F to increase friction, f to lower it", 10, 220);
+    text("Click R to reset everything back to normal", 10, 260);
+    text("Click i to change the ball", 10, 300);
+
+    textSize(30);
+    textAlign(RIGHT);
+    text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", window.innerWidth - 20, 120);
+    text("Launch Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", window.innerWidth - 20, 200);
+    text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
+
+    if (Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000 > 0) {
+        text("Curreny ball speed: " + Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000,
+            window.innerWidth - 20, window.innerHeight - 20)
+    }
+    else {
+        text("Curreny ball speed: " + Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000 * -1,
+            window.innerWidth - 20, window.innerHeight - 20)
+    }
 
     if (selected_ball >= ballIMG.length) {
         selected_ball = 0;
