@@ -136,32 +136,32 @@ function draw() {
 }
 function keyPressed() {
     // correct answers for test
-    if (key === "q" && !Q1Answered) {
+    if (key === "q" || key === "Q" && !Q1Answered) {
         score++;
         Q1Correct = true;
     }
-    else if (key === "e" && !Q1Answered) {
+    else if (key === "e" || key === "E"&& !Q1Answered) {
         score += 2;
         Q1MegaCorrect = true;
     }
-    else if (key === "t" && !Q2Answered) {
+    else if (key === "t" || key === "T" && !Q2Answered) {
         score++;
         Q2Correct = true;
     }
-    else if (key === "i" && !Q3Answered) {
+    else if (key === "i" || key === "I" && !Q3Answered) {
         score++;
         Q3Correct = true;
     }
-    else if (key === "p" && !Q4Answered) {
+    else if (key === "p" || key === "P" && !Q4Answered) {
         score++;
         Q4Correct = true;
     }
-    else if (key === "f" && !Q5Answered) {
+    else if (key === "f" || key === "F" && !Q5Answered) {
         score++;
         Q5Correct = true;
     }
     // to check test score
-    if (key === "?") {
+    if (key === "?" || key === "/") {
         scoreCheck = true;
         if (score === 6) {
             ranking = "diamond";
@@ -180,7 +180,7 @@ function keyPressed() {
         testFinished = true;
     }
     // resets variables to default
-    if (testFinished && key === "!") {
+    if (testFinished && key === "!" || key === "1") {
         Q1Answered = false;
         Q2Answered = false;
         Q3Answered = false;
@@ -199,19 +199,19 @@ function keyPressed() {
 
     }
     //checks to see if a question has been asnwered
-    if (key === "q" || key === "w" || key === "e") {
+    if (key === "q" || key === "w" || key === "e" || key === "Q" || key === "W" || key === "E") {
         Q1Answered = true;
     }
-    else if (key === "r" || key === "t" || key === "y") {
+    else if (key === "r" || key === "t" || key === "y" || key ==="R" || key === "T" || key === "Y") {
         Q2Answered = true;
     }
-    else if (key === "u" || key === "i" || key === "o") {
+    else if (key === "u" || key === "i" || key === "o" || key === "U" || key === "I" || key ==="O") {
         Q3Answered = true;
     }
-    else if (key === "p" || key === "a" || key === "s") {
+    else if (key === "p" || key === "a" || key === "s" || key === "P" || key ==="A" || key === "S") {
         Q4Answered = true;
     }
-    else if (key === "d" || key === "f" || key === "g") {
+    else if (key === "d" || key === "f" || key === "g" || key === "D" || key === "F" || key === "G") {
         Q5Answered = true;
     }
 }
