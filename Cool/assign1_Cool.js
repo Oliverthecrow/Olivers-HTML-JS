@@ -162,7 +162,7 @@ function keyPressed() {
         Q5Correct = true;
     }
     // to check test score
-    if (key === "?" || key === "/") {
+    else if (key === "?" || key === "/") {
         scoreCheck = true;
         if (score === 6) {
             ranking = "diamond";
