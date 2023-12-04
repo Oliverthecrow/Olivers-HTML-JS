@@ -181,7 +181,7 @@ function keyPressed() {
         testFinished = true;
     }
     // resets variables to default
-    if (testFinished && key === "!" || key === "1") {
+    if (testFinished && key === "!" || key === "1" && testFinished) {
         Q1Answered = false;
         Q2Answered = false;
         Q3Answered = false;
