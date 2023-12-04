@@ -13,6 +13,10 @@ let gravity = 0.5;
 let launchspeed = 0.05;
 let friction = 0.07;
 
+let timer;
+let Ballspeed = 0;
+let RBallspeed = 0;
+
 let ball = {
     X: 900,
     Y: 475,
@@ -35,6 +39,8 @@ function setup() {
     stroke(255);
 }
 function draw() {
+    timer = millis();
+
     background(30);
     image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
     if (actionMade && !mouseheld) {
@@ -57,9 +63,8 @@ function draw() {
         if (ball.vy > 0) {
             ball.vy -= friction;
         }
-        print(ball.vx)
-        print(ball.vy)
     }
+
     ball.Y += ball.vy;
     ball.X += ball.vx;
     bounds()
@@ -92,19 +97,18 @@ function draw() {
     text("Launch Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", window.innerWidth - 20, 200);
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
 
-    if (Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000 > 0) {
-        text("Curreny ball speed: " + Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000,
-            window.innerWidth - 20, window.innerHeight - 20)
+    if (timer % 2 === 0) {
+        Ballspeed = Math.abs(ball.vy) + Math.abs(ball.vx);
+        RBallspeed = Math.round(1000 * Ballspeed) / 1000;
     }
-    else {
-        text("Curreny ball speed: " + Math.round(1000 * ball.vx + 1000 * ball.vy) / 1000 * -1,
-            window.innerWidth - 20, window.innerHeight - 20)
-    }
+    text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 20);
+
 
     if (selected_ball >= ballIMG.length) {
         selected_ball = 0;
     }
 }
+
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
         return false;
