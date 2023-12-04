@@ -137,27 +137,27 @@ function draw() {
 }
 function keyPressed() {
     // correct answers for test
-    if (key === "q" || key === "Q" && !Q1Answered) {
+    if (key === "q" && !Q1Answered || key === "Q" && !Q1Answered) {
         score++;
         Q1Correct = true;
     }
-    else if (key === "e" || key === "E" && !Q1Answered) {
+    else if (key === "e" && !Q1Answered || key === "E" && !Q1Answered) {
         score += 2;
         Q1MegaCorrect = true;
     }
-    else if (key === "t" || key === "T" && !Q2Answered) {
+    else if (key === "t" && !Q2Answered || key === "T" && !Q2Answered) {
         score++;
         Q2Correct = true;
     }
-    else if (key === "i" || key === "I" && !Q3Answered) {
+    else if (key === "i" && !Q3Answered || key === "I" && !Q3Answered) {
         score++;
         Q3Correct = true;
     }
-    else if (key === "p" || key === "P" && !Q4Answered) {
+    else if (key === "p" && !Q4Answered || key === "P" && !Q4Answered) {
         score++;
         Q4Correct = true;
     }
-    else if (key === "f" || key === "F" && !Q5Answered) {
+    else if (key === "f" && !Q5Answered || key === "F" && !Q5Answered) {
         score++;
         Q5Correct = true;
     }
