@@ -2,14 +2,14 @@ let score = 0;
 let name = "";
 let ranking = "";
 let scoreCheck = false;
+let testFinished = false;
+
 let Q1Answered = false;
 let Q2Answered = false;
 let Q3Answered = false;
 let Q4Answered = false;
 let Q5Answered = false;
-let testFinished = false;
 let Q1Correct = false;
-//Q1MegaCorrect is intentional, there are two right answers to the first question, just one of them gives more points 
 let Q1MegaCorrect = false;
 let Q2Correct = false;
 let Q3Correct = false;
@@ -20,6 +20,7 @@ let Q2 = "Question 2: What animal out of the the choices is your favourite? \n r
 let Q3 = "Question 3: How many hours in Satisfactory do you have \n u) What is that?    i) >2     o) <2";
 let Q4 = "Question 4: Favourite subject in school \n p) Math     a) L.A     s) Social";
 let Q5 = "Question 5: What is 9 + 10 \n d) 19     f) 21     g) 90";
+
 let green;
 let red;
 let blue;
@@ -42,7 +43,7 @@ function draw() {
     stroke(255);
     textSize(50);
     textAlign(CENTER);
-    text("THE COOLNESS TEST", window.innerWidth/2, 50);
+    text("THE COOLNESS TEST", window.innerWidth / 2, 50);
     textAlign(LEFT);
     strokeWeight(5);
     line(0, 65, 2000, 65);
@@ -118,7 +119,7 @@ function draw() {
     textSize(35)
     textAlign(RIGHT)
     text(name + ", your coolness™ score is " + score, window.innerWidth - 25, 500);
-    text("Click ? to check your rank", window.innerWidth -25, 550);
+    text("Click ? to check your rank", window.innerWidth - 25, 550);
     if (scoreCheck === true) {
         if (ranking === "diamond") {
             text(name + ", your rank is " + ranking + "\n100%, good job! You're cool", window.innerWidth - 25, 600);
@@ -140,7 +141,7 @@ function keyPressed() {
         score++;
         Q1Correct = true;
     }
-    else if (key === "e" || key === "E"&& !Q1Answered) {
+    else if (key === "e" || key === "E" && !Q1Answered) {
         score += 2;
         Q1MegaCorrect = true;
     }
@@ -202,13 +203,13 @@ function keyPressed() {
     if (key === "q" || key === "w" || key === "e" || key === "Q" || key === "W" || key === "E") {
         Q1Answered = true;
     }
-    else if (key === "r" || key === "t" || key === "y" || key ==="R" || key === "T" || key === "Y") {
+    else if (key === "r" || key === "t" || key === "y" || key === "R" || key === "T" || key === "Y") {
         Q2Answered = true;
     }
-    else if (key === "u" || key === "i" || key === "o" || key === "U" || key === "I" || key ==="O") {
+    else if (key === "u" || key === "i" || key === "o" || key === "U" || key === "I" || key === "O") {
         Q3Answered = true;
     }
-    else if (key === "p" || key === "a" || key === "s" || key === "P" || key ==="A" || key === "S") {
+    else if (key === "p" || key === "a" || key === "s" || key === "P" || key === "A" || key === "S") {
         Q4Answered = true;
     }
     else if (key === "d" || key === "f" || key === "g" || key === "D" || key === "F" || key === "G") {
