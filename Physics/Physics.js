@@ -18,8 +18,8 @@ let Ballspeed = 0;
 let RBallspeed = 0;
 
 let ball = {
-    X: 900,
-    Y: 475,
+    X: window.innerWidth / 2,
+    Y: window.innerHeight / 4,
     radius: 50,
     vx: 0,
     vy: 0,
@@ -35,7 +35,7 @@ function setup() {
 
     let sketch = createCanvas(window.innerWidth, window.innerHeight);
     sketch.parent("PhysicsCanvas");
-    strokeWeight(0.5);
+    strokeWeight(0);
     stroke(255);
 }
 function draw() {
@@ -86,10 +86,10 @@ function draw() {
     textSize(20);
     text("Click and drag the face to launch it.", 10, 100);
     text("+ or - for gravity.", 10, 140);
-    text("S to speed up launch, L to lower it, and W for speed", 10, 180);
-    text("F to increase friction, f to lower it", 10, 220);
-    text("Click R to reset everything back to normal", 10, 260);
-    text("Click i to change the ball", 10, 300);
+    text("S to speed up launch, L to lower it, and W for speed.", 10, 180);
+    text("F to increase friction, f to lower it.", 10, 220);
+    text("Click R to reset everything back to normal.", 10, 260);
+    text("Click i to change the ball.", 10, 300);
 
     textSize(30);
     textAlign(RIGHT);
@@ -98,17 +98,16 @@ function draw() {
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
 
     if (timer % 2 === 0) {
-        Ballspeed = Math.abs(ball.vy) + Math.abs(ball.vx);
+        Ballspeed = Math.sqrt(Math.pow(ball.vy, 2) + Math.pow(ball.vx, 2));
         RBallspeed = Math.round(1000 * Ballspeed) / 1000;
     }
-    text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 20);
-
+    textSize(50)
+    text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
 
     if (selected_ball >= ballIMG.length) {
         selected_ball = 0;
     }
 }
-
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
         return false;
