@@ -24,6 +24,7 @@ let ball = {
     vx: 0,
     vy: 0,
 }
+
 function setup() {
     ballIMG = [
         terror = loadImage("terror.png"),
@@ -38,11 +39,18 @@ function setup() {
     strokeWeight(0);
     stroke(255);
 }
-function draw() {
+
+function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
     timer = millis();
 
     background(30);
     image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
+
+    speedball();
+    physics();
+    bounds();
+
+    //so sad that this does not work in function physics
     if (actionMade && !mouseheld) {
         ball.vy += gravity;
         if (ball.vx > 0) {
@@ -65,9 +73,6 @@ function draw() {
         }
     }
 
-    ball.Y += ball.vy;
-    ball.X += ball.vx;
-    bounds()
     if (mouseheld) {
         stroke(50);
         strokeWeight(2);
@@ -97,17 +102,14 @@ function draw() {
     text("Launch Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", window.innerWidth - 20, 200);
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
 
-    if (timer % 2 === 0) {
-        Ballspeed = Math.sqrt(Math.pow(ball.vy, 2) + Math.pow(ball.vx, 2));
-        RBallspeed = Math.round(1000 * Ballspeed) / 1000;
-    }
     textSize(50)
     text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
 
     if (selected_ball >= ballIMG.length) {
         selected_ball = 0;
     }
-}
+} //---------------- end of draw ----------------------------------------------------------------------------------------- //
+
 function incircle() {
     if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
         return false;
@@ -117,6 +119,7 @@ function incircle() {
     }
     return true;
 }
+
 function bounds() {
     if (ball.Y > window.innerHeight - ball.radius) {
         ball.Y -= ball.vy;
@@ -147,6 +150,7 @@ function bounds() {
         lasthitsurface = "top";
     }
 }
+
 function mousePressed() {
     if (incircle()) {
         mouseheld = true;
@@ -154,6 +158,7 @@ function mousePressed() {
         ball.vy = 0;
     }
 }
+
 function mouseReleased() {
     if (mouseheld) {
         lineXlength = mouseX - ball.X;
@@ -164,9 +169,11 @@ function mouseReleased() {
         ball.vy += lineYlength * launchspeed;
     }
 }
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
 function keyPressed() {
     if (key === "+" || key === "=") {
         gravity += 0.1;
@@ -201,5 +208,17 @@ function keyPressed() {
         if (selected_ball >= ballIMG.length) {
             selected_ball = 0;
         }
+    }
+}
+
+function physics() {
+    ball.Y += ball.vy;
+    ball.X += ball.vx;
+}
+
+function speedball() {
+    if (timer % 2 === 0) {
+        Ballspeed = Math.sqrt(Math.pow(ball.vy, 2) + Math.pow(ball.vx, 2));
+        RBallspeed = Math.round(1000 * Ballspeed) / 1000;
     }
 }
