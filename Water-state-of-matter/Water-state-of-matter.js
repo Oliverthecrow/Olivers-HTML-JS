@@ -9,6 +9,7 @@ let water = {
 function setup() {
     let sketch = createCanvas(WIW, WIH);
     sketch.parent("WaterSimulationCanvas");
+    rectMode(CORNERS)
 }
 function draw() { //--------------------------------- start of draw ---------------------------------------------------------//
     background(0);
@@ -30,11 +31,11 @@ function windowResized() {
 }
 function DrawWater() {
     for (let circlecount = 0; circlecount < 30; circlecount++) {
-        circle(random(100 + water.R, WIW - 200 + water.R), random(100 + water.R, WIH - 150), water.R);
-        circle(random(100 + water.R, WIW - 200 + water.R), random(100 + water.R, WIH - 150), water.R);
-        circle(random(100 + water.R, WIW - 200 + water.R), random(100 + water.R, WIH - 150), water.R);
-        circle(random(100 + water.R, WIW - 200 + water.R), random(100 + water.R, WIH - 150), water.R);
-        circle(random(100 + water.R, WIW - 200 + water.R), random(100 + water.R, WIH - 150), water.R);
+        circle(random(100 + water.R, WIW - 200 - water.R), random(100 + water.R, WIH - 200 - water.R), water.R);
+        circle(random(100 + water.R, WIW - 200 - water.R), random(100 + water.R, WIH - 200 - water.R), water.R);
+        circle(random(100 + water.R, WIW - 200 - water.R), random(100 + water.R, WIH - 200 - water.R), water.R);
+        circle(random(100 + water.R, WIW - 200 - water.R), random(100 + water.R, WIH - 200 - water.R), water.R);
+        circle(random(100 + water.R, WIW - 200 - water.R), random(100 + water.R, WIH - 200 - water.R), water.R);
     }
 }
 function BG() {
