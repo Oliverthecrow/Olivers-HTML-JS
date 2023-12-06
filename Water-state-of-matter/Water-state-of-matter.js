@@ -12,7 +12,7 @@ function setup() {
     rectMode(CORNERS)
 }
 function draw() { //--------------------------------- start of draw ---------------------------------------------------------//
-    background(0);
+    background(0,0,0,0);
     BG()
 
     fill(30, 70, 255)
@@ -21,7 +21,6 @@ function draw() { //--------------------------------- start of draw ------------
     textAlign(CENTER);
     textSize(25);
     fill(255);
-    text("yes, this is all it does, it was practice to better understand functions and calling them.", WIW / 2, WIH - 30);
 }
 function mouseClicked() {
     print(mouseY);

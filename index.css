@@ -1,66 +1,68 @@
+
 div {
   position: relative;
   top: -100px;
 }
-  body {
-    background:url("BG.jpg") no-repeat center center fixed;
-    background-size: cover;
-    width: auto;
-    margin: 20px;
-    font-size: 40px;
-    color: #efe6f0;
-  }
-  li{
-    margin: 40px 0;
-    position: relative;
-    top: -75px;
-  }
-  .head2 {
-    position: absolute;
-    top: 150px;
-    left: 30px;
-  }
-  .top-right {
-    position: absolute;
-    top: 80px;
-    right: 30px;
-  }
-  .About-Me {
-    text-align: right;
-    position: absolute;
-    top: 200px;
-    right: 30px;
-    font-size:60px;
-  }
-  .Funny {
-    text-align:right;
-    position:relative;
-    top:-110px;
-  }
-  .Land-ack{
-    font-size: 60px;
-    text-align:right;
-    position: absolute;
-    top: 620px;
-    right: 30px;
-  }
-  a {
-    color: #ffffff
-  }
-  ol {
-    position: absolute;
-    top: 90px;
-    left: 5px;
 
-    border: 6px;
-    width: 400px;
-    height: 250px;
-    border-style: solid;
-    border-image: linear-gradient(to bottom, darkblue, cyan,black) 1;
-    padding:80px 80px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 3px #292726;
-  }
+body {
+  background: url("BG.jpg") no-repeat center center fixed;
+  background-size: cover;
+  width: auto;
+  margin: 20px;
+  font-size: 40px;
+  color: #efe6f0;
+}
+
+li {
+  margin: 40px 0;
+  position: relative;
+  top: -75px;
+}
+
+.head2 {
+  position: absolute;
+  top: 150px;
+  left: 30px;
+}
+
+.top-right {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+}
+
+.About-Me {
+  text-align: right;
+  position: absolute;
+  top: 200px;
+  right: 30px;
+  font-size: 60px;
+}
+
+.Funny {
+  text-align: right;
+  position: relative;
+  top: -110px;
+}
+
+.Land-ack {
+  font-size: 60px;
+  text-align: right;
+  position: absolute;
+  top: 620px;
+  right: 30px;
+}
+
+a {
+  color: #ffffff
+}
+
+ol {
+  position: absolute;
+  top: 90px;
+  left: 50px;
+}
+
 button {
   color: white;
   height: 50px;
@@ -72,10 +74,62 @@ button {
   background-size: 300px 50px;
   border: 4px black;
 }
+
 .num {
   position: absolute;
   top: 410px;
   right: 40px;
-  
 }
 
+/* code from https://www.youtube.com/watch?v=-VOUK-xFAyk&t=317s, or https://codepen.io/kevinpowell/pen/QWVKZjx */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+}
+
+.card {
+  height: 60vh;
+  aspect-ratio: 1 / 1.5;
+  background: var(--clr-1);
+  border-radius: 0.5rem;
+
+  position: relative;
+  top: 75px;
+  left: 20px;
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  background: conic-gradient(from var(--gradient-angle),
+          var(--clr-3),
+          var(--clr-4),
+          var(--clr-4),
+          var(--clr-3));
+  border-radius: inherit;
+  animation: rotation 20s linear infinite;
+}
+.card::after {
+  filter: blur(3.5rem);
+}
+
+@keyframes rotation {
+  0% {
+      --gradient-angle: 0deg;
+  }
+
+  100% {
+      --gradient-angle: 360deg;
+  }
+}
