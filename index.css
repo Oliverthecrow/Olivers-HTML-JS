@@ -63,7 +63,7 @@ ol {
 
   border: 6px;
   width: 400px;
-  height: 250px;
+  height: auto;
   border-style: solid;
   border-image: linear-gradient(to bottom, darkblue, cyan, black) 1;
   padding: 80px 80px;

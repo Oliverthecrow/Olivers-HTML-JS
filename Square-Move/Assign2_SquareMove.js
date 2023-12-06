@@ -168,7 +168,7 @@ function bounds() {
         selected_color = 0;
     }
 }
-//speedboost resets after 5 seconds of clicking p
+//speedboost resets after 5 seconds of clicking p, but timer resets on clicking p as well
 function speedtimer() {
     speedboost = 0;
 }

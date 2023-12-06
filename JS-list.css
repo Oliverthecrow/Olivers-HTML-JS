@@ -1,16 +1,7 @@
 ol {
     position: relative;
-    top: 60px;
-    left: 5px;
-
-    border: 6px;
-    width: 400px;
-    height: 250px;
-    border-style: solid;
-    border-image: linear-gradient(to bottom, darkblue, cyan, black) 1;
-    padding: 80px 80px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 3px #292726;
+    top: -250px;
+    left: 50px;
 }
 
 li {
@@ -40,4 +31,18 @@ h1 {
 
 a {
     color: white
+}
+.border {
+    position: relative;
+    top: 0px;
+    left: 20px;
+    border: 6px;
+    width: 400px;
+    height: 250px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, darkblue, cyan, black) 1;
+    padding: 80px 80px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 3px #292726;
+    filter:blur(0.25rem)
 }
