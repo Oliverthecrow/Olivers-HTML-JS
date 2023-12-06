@@ -74,16 +74,16 @@ function draw() { //--------------------------------------- Start of Draw ------
     Rsquarspeed = Math.round(1000 * squarespeed) / 1000;
 } //--------------------------------------------------------------------------- End of Draw ---------------------------------------//
 function keyPressed() {
-    if (key === "a") {
+    if (key === "a" || key === "A") {
         moveleft = true
     }
-    if (key === "d") {
+    if (key === "d" || key === "D") {
         moveright = true
     }
-    if (key === "w") {
+    if (key === "w" || key === "W") {
         moveup = true
     }
-    if (key === "s") {
+    if (key === "s" || key === "S") {
         movedown = true
     }
     if (key === " ") {
@@ -99,19 +99,19 @@ function keyPressed() {
     }
 }
 function keyReleased() {
-    if (key === "a") {
+    if (key === "a" || key === "A") {
         moveleft = false
         vx = 0
     }
-    if (key === "d") {
+    if (key === "d" || key === "D") {
         moveright = false
         vx = 0
     }
-    if (key === "w") {
+    if (key === "w" || key === "W") {
         moveup = false
         vy = 0
     }
-    if (key === "s") {
+    if (key === "s" || key === "S") {
         movedown = false
         vy = 0
     }
