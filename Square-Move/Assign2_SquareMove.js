@@ -9,10 +9,14 @@ let movedown = false;
 let brake = false;
 
 let speedboost = 0;
+
 let squarespeed = 0;
-let Rsquarspeed = 0;
+let SpeedPerSecond = 0;
+
 let vy = 0;
 let vx = 0;
+let squareVX = 0;
+let squareVY = 0;
 
 let timer;
 let timerId;
@@ -46,20 +50,19 @@ function setup() {
     ];
 }
 function draw() { //--------------------------------------- Start of Draw ----------------------------------------------- //
+    timer=millis();
     background(10)
 
-    if (selected_color >= Colors.length) {
-        selected_color = 0;
-    }
     fill(Colors[selected_color])
     square(squareX, squareY, squaresize);
 
     movement();
     bounds();
+    speed();
 
     fill(255)
     textSize(30)
-    text("Your current speed: " + Rsquarspeed, window.innerWidth / 2, window.innerHeight - 100)
+    text("Your current speed: " + SpeedPerSecond + "px/s", window.innerWidth / 2, window.innerHeight - 100)
     text("Current speedboost: " + Math.round(100 * speedboost) / 100, window.innerWidth / 2, window.innerHeight - 60)
     text("To increase speed boost click P", window.innerWidth / 2, window.innerHeight - 20)
 
@@ -69,9 +72,6 @@ function draw() { //--------------------------------------- Start of Draw ------
     if (squareY < 40) {
         text("ENTERING ENEMY TERRITORY, CAUTION ADVISED.", window.innerWidth / 2, 30)
     }
-
-    squarespeed = Math.sqrt(Math.pow(Math.abs(vy), 2) + Math.pow(Math.abs(vx), 2));
-    Rsquarspeed = Math.round(1000 * squarespeed) / 1000;
 } //--------------------------------------------------------------------------- End of Draw ---------------------------------------//
 function keyPressed() {
     if (key === "a" || key === "A") {
@@ -100,20 +100,24 @@ function keyPressed() {
 }
 function keyReleased() {
     if (key === "a" || key === "A") {
-        moveleft = false
-        vx = 0
+        moveleft = false;
+        vx = 0;
+        squareVX = 0;
     }
     if (key === "d" || key === "D") {
-        moveright = false
-        vx = 0
+        moveright = false;
+        vx = 0;
+        squareVX = 0;
     }
     if (key === "w" || key === "W") {
-        moveup = false
-        vy = 0
+        moveup = false;
+        vy = 0;
+        squareVY = 0;
     }
     if (key === "s" || key === "S") {
-        movedown = false
-        vy = 0
+        movedown = false;
+        vy = 0;
+        squareVY = 0;
     }
     if (key === " ") {
         brake = false
@@ -123,19 +127,23 @@ function movement() {
     if (!brake) {
         if (moveleft === true) {
             vx -= 0.1 + speedboost
-            squareX -= 3 - vx * 0.3
+            squareVX = 3 - vx * 0.3
+            squareX -= squareVX
         }
         if (moveright === true) {
             vx += 0.1 + speedboost
-            squareX += 3 + vx * 0.3
+            squareVX = 3 + vx * 0.3
+            squareX += squareVX
         }
         if (moveup === true) {
             vy -= 0.1 + speedboost
-            squareY -= 3 - vy * 0.3
+            squareVY = 3 - vy * 0.3
+            squareY -= squareVY
         }
         if (movedown === true) {
             vy += 0.1 + speedboost
-            squareY += 3 + vy * 0.3
+            squareVY = 3 + vy * 0.3
+            squareY += squareVY
         }
     }
 }
@@ -156,6 +164,9 @@ function bounds() {
         squareY = window.innerHeight - 20
         selected_color++;
     }
+    if (selected_color >= Colors.length) {
+        selected_color = 0;
+    }
 }
 //speedboost resets after 5 seconds of clicking p
 function speedtimer() {
@@ -163,4 +174,11 @@ function speedtimer() {
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+//slows down math so that the number is actually readable on screen
+function speed() {
+    if (timer % 0.5 === 0) {
+    squarespeed = Math.sqrt(Math.pow(Math.abs(squareVX), 2) + Math.pow(Math.abs(squareVY), 2));
+    SpeedPerSecond = Math.round(1000 * squarespeed * 60) / 1000;
+    }
 }
