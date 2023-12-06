@@ -61,7 +61,7 @@ function draw() { //--------------------------------------- Start of Draw ------
     textSize(30)
     text("Your current speed: " + Rsquarspeed, window.innerWidth / 2, window.innerHeight - 100)
     text("Current speedboost: " + Math.round(100 * speedboost) / 100, window.innerWidth / 2, window.innerHeight - 60)
-    text("To increase speed boost click P, to lower it click -", window.innerWidth / 2, window.innerHeight - 20)
+    text("To increase speed boost click P", window.innerWidth / 2, window.innerHeight - 20)
 
     fill(250, 150, 150)
     rect(0, 0, window.innerWidth, 40)
