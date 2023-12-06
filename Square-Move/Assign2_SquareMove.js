@@ -11,12 +11,14 @@ let brake = false;
 let speedboost = 0;
 let squarespeed = 0;
 let Rsquarspeed = 0;
-let vy;
-let vx;
+let vy = 0;
+let vx = 0;
 
 let timer;
 let timerId;
 let TimerOn = false;
+
+let squaresize = 20;
 
 function setup() {
     let sketch = createCanvas(window.innerWidth, window.innerHeight)
@@ -29,21 +31,22 @@ function draw() { //--------------------------------------- Start of Draw ------
     background(10)
 
     fill(255)
-    square(squareX, squareY, 20)
+    square(squareX, squareY, squaresize)
 
     movement();
     bounds();
 
-
     textSize(30)
     text("Your current speed: " + Rsquarspeed, window.innerWidth / 2, window.innerHeight - 20)
-    text("Current speedboost: " + speedboost, window.innerWidth / 2, window.innerHeight - 60)
+    text("Current speedboost: " + Math.round(100 * speedboost) / 100, window.innerWidth / 2, window.innerHeight - 60)
     text("To increase speed boost click P, to lower it click -", window.innerWidth / 2, -100)
 
     fill(250, 150, 150)
     rect(0, 0, window.innerWidth, 40)
     fill(0)
+    if (squareY < 40) {
     text("ENTERING ENEMY TERRITORY, CAUTION ADVISED.", window.innerWidth / 2, 30)
+    }
 
     squarespeed = Math.sqrt(Math.pow(Math.abs(vy), 2) + Math.pow(Math.abs(vx), 2));
     Rsquarspeed = Math.round(1000 * squarespeed) / 1000;
@@ -63,9 +66,10 @@ function keyPressed() {
     }
     if (key === " ") {
         brake = true
+        squarespeed = 0
     }
     if (key === "p") {
-        speedboost += 0.5
+        speedboost += 0.05
         if (timerId) {
             clearTimeout(timerId);
         }
@@ -91,26 +95,25 @@ function keyReleased() {
     }
     if (key === " ") {
         brake = false
-        squarespeed = 0
     }
 }
 function movement() {
     if (!brake) {
         if (moveleft === true) {
-            squareX -= 5 + speedboost
-            vx = -5 - speedboost
+            vx -= 0.1 + speedboost
+            squareX -= 3 - vx *0.3
         }
         if (moveright === true) {
-            squareX += 5 + speedboost
-            vx = 5 + speedboost
+            vx += 0.1 + speedboost
+            squareX += 3 + vx * 0.3
         }
         if (moveup === true) {
-            squareY -= 5 + speedboost
-            vy = -5 - speedboost
+            vy -= 0.1 + speedboost
+            squareY -= 3 - vy * 0.3
         }
         if (movedown === true) {
-            squareY += 5 + speedboost
-            vy = 5 + speedboost
+            vy += 0.1 + speedboost
+            squareY += 3 + vy * 0.3
         }
     }
 }
@@ -131,4 +134,7 @@ function bounds() {
 //speedboost resets after 5 seconds of clicking p
 function speedtimer() {
     speedboost = 0;
+}
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
