@@ -1,6 +1,6 @@
 ol {
     position: relative;
-    top: -250px;
+    top: 50px;
     left: 50px;
 }
 
@@ -11,10 +11,10 @@ li {
     width: 350px;
     height: 50px;
     -webkit-transition: color 1s;
-    -moz-transition:    color 1s;
-    -ms-transition:     color 1s;
-    -o-transition:      color 1s;
-    transition:         color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
 }
 
 div {
@@ -34,34 +34,84 @@ body {
 h1 {
     position: relative;
     top: -40px;
+    color: #1154f0;
+    animation: animate 4s ease-in-out infinite;
+}
+
+h3 {
+    display: block;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    position: relative;
+    color: #1154f0;
+    animation: animate 4s ease-in-out infinite;
+}
+
+h2 {
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    display: block;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h2:hover {
+    text-shadow: 0 0 10px rgba(19, 240, 151, 0.1), 0 0 20px rgba(19, 240, 151, 0.2),
+        0 0 30px rgba(19, 240, 151, 0.6), 0 0 40px rgba(19, 240, 151, 0.8);
+        -webkit-text-stroke: 2px rgb(19, 240, 151)
+}
+
+@keyframes animate {
+
+    0%,
+    100% {
+        clip-path: polygon(0% 53%, 14% 49%, 29% 52%, 37% 58%, 49% 60%, 64% 64%, 82% 61%, 98% 54%, 100% 100%, 0 99%);
+    }
+
+    50% {
+        clip-path: polygon(0 50%, 15% 58%, 28% 60%, 44% 61%, 58% 56%, 72% 50%, 86% 46%, 100% 49%, 100% 100%, 0 99%);
+    }
 }
 
 a {
     color: white;
     -webkit-transition: color 1s;
-    -moz-transition:    color 1s;
-    -ms-transition:     color 1s;
-    -o-transition:      color 1s;
-    transition:         color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
 }
 
 a:hover {
     color: #13f097;
+    text-shadow: 0 0 10px #13f097, 0 0 20px #13f097, 0 0 30px #13f097, 0 0 40px #13f097;
 }
 
 li:hover {
     color: #13f097;
+    text-shadow: 0 0 10px #13f097, 0 0 20px #13f097, 0 0 30px #13f097, 0 0 40px #13f097;
 }
 
 .border {
     position: relative;
-    top: 0px;
+    top: -40px;
     left: 20px;
     border: 6px;
     width: 400px;
     height: 300px;
     border-style: solid;
     border-image: linear-gradient(to bottom, #08295F, cyan, #001B30) 1;
+    background: rgba(0, 0, 0, 0.3);
     padding: 80px 80px;
     border-radius: 10px;
     box-shadow: 15px 15px 50px black, -5px -5px 50px whitesmoke;
@@ -79,11 +129,11 @@ li:hover {
 
 .gradient-border {
     --borderWidth: 15px;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     position: relative;
     border-radius: var(--borderWidth);
     top: -125vh;
-    right: -35vw;
+    right: -36vw;
 }
 
 .gradient-border:after {
@@ -115,3 +165,15 @@ li:hover {
     }
 }
 
+.cursor {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    filter: blur(0.4rem);
+    border-radius: 5%;
+    width: 1px;
+    height: 1px;
+    margin: 0px 0 0 0px;
+}
