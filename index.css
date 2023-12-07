@@ -69,6 +69,7 @@ ol {
   padding: 80px 80px;
   border-radius: 10px;
   box-shadow: 10px 10px 3px #292726;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 button {

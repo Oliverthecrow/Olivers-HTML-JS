@@ -30,9 +30,9 @@ let selected_color = 0;
 function setup() {
     let sketch = createCanvas(window.innerWidth, window.innerHeight)
     sketch.parent("SquareMoveCanvas")
-    squareX = window.innerWidth / 2
-    squareY = window.innerHeight / 2
-    textAlign(CENTER)
+    squareX = window.innerWidth / 2;
+    squareY = window.innerHeight / 2;
+    textAlign(CENTER);
 
     Colors = [
         color(255,), //white
@@ -51,47 +51,47 @@ function setup() {
 }
 function draw() { //--------------------------------------- Start of Draw ----------------------------------------------- //
     timer=millis();
-    background(10)
+    background(10);
 
-    fill(Colors[selected_color])
+    fill(Colors[selected_color]);
     square(squareX, squareY, squaresize);
 
     movement();
     bounds();
     speed();
 
-    fill(255)
-    textSize(30)
-    text("Your current speed: " + SpeedPerSecond + "px/s", window.innerWidth / 2, window.innerHeight - 100)
-    text("Current speedboost: " + Math.round(100 * speedboost) / 100, window.innerWidth / 2, window.innerHeight - 60)
-    text("To increase speed boost click P", window.innerWidth / 2, window.innerHeight - 20)
+    fill(255);
+    textSize(30);
+    text("Your current speed: " + SpeedPerSecond + "px/s", window.innerWidth / 2, window.innerHeight - 100);
+    text("Current speedboost: " + Math.round(100 * speedboost) / 100, window.innerWidth / 2, window.innerHeight - 60);
+    text("To increase speed boost click P", window.innerWidth / 2, window.innerHeight - 20);
 
-    fill(250, 150, 150)
-    rect(0, 0, window.innerWidth, 40)
-    fill(0)
+    fill(250, 150, 150);
+    rect(0, 0, window.innerWidth, 40);
+    fill(0);
     if (squareY < 40) {
-        text("ENTERING ENEMY TERRITORY, CAUTION ADVISED.", window.innerWidth / 2, 30)
+        text("ENTERING ENEMY TERRITORY, CAUTION ADVISED.", window.innerWidth / 2, 30);
     }
 } //--------------------------------------------------------------------------- End of Draw ---------------------------------------//
 function keyPressed() {
     if (key === "a" || key === "A") {
-        moveleft = true
+        moveleft = true;
     }
     if (key === "d" || key === "D") {
-        moveright = true
+        moveright = true;
     }
     if (key === "w" || key === "W") {
-        moveup = true
+        moveup = true;
     }
     if (key === "s" || key === "S") {
-        movedown = true
+        movedown = true;
     }
     if (key === " ") {
-        brake = true
-        squarespeed = 0
+        brake = true;
+        squarespeed = 0;
     }
     if (key === "p") {
-        speedboost += 0.05
+        speedboost += 0.05;
         if (timerId) {
             clearTimeout(timerId);
         }
@@ -120,30 +120,30 @@ function keyReleased() {
         squareVY = 0;
     }
     if (key === " ") {
-        brake = false
+        brake = false;
     }
 }
 function movement() {
     if (!brake) {
         if (moveleft === true) {
-            vx -= 0.1 + speedboost
-            squareVX = 3 - vx * 0.3
-            squareX -= squareVX
+            vx -= 0.1 + speedboost;
+            squareVX = 3 - vx * 0.3;
+            squareX -= squareVX;
         }
         if (moveright === true) {
-            vx += 0.1 + speedboost
-            squareVX = 3 + vx * 0.3
-            squareX += squareVX
+            vx += 0.1 + speedboost;
+            squareVX = 3 + vx * 0.3;
+            squareX += squareVX;
         }
         if (moveup === true) {
-            vy -= 0.1 + speedboost
-            squareVY = 3 - vy * 0.3
-            squareY -= squareVY
+            vy -= 0.1 + speedboost;
+            squareVY = 3 - vy * 0.3;
+            squareY -= squareVY;
         }
         if (movedown === true) {
-            vy += 0.1 + speedboost
-            squareVY = 3 + vy * 0.3
-            squareY += squareVY
+            vy += 0.1 + speedboost;
+            squareVY = 3 + vy * 0.3;
+            squareY += squareVY;
         }
     }
 }

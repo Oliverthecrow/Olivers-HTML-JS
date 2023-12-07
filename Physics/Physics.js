@@ -6,6 +6,9 @@ let lasthitsurface = "";
 let selected_ball = 0;
 let ballIMG;
 
+let backgroundIMG;
+let selected_img = 0;
+
 let lineXlength = 0;
 let lineYlength = 0;
 
@@ -25,6 +28,7 @@ let ball = {
     vx: 0,
     vy: 0,
 };
+
 document.addEventListener("DOMContentLoaded", function () {
     let slider = document.getElementById("ballRadiusSlider");
     slider.addEventListener("input", function () {
@@ -41,6 +45,13 @@ function setup() {
         CloseUpSkuna = loadImage("Close-Up-Skuna.png"),
     ];
 
+    backgroundIMG = [
+        grey = loadImage("grey.png"),
+        Window = loadImage("windowxp.jpg"),
+        cave = loadImage("cave.webp"),
+        cat = loadImage("cat.jpg")
+    ];
+
     let sketch = createCanvas(window.innerWidth, window.innerHeight);
     sketch.parent("PhysicsCanvas");
     strokeWeight(0);
@@ -50,14 +61,13 @@ function setup() {
 function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
     timer = millis();
 
-    background(30);
+    background(backgroundIMG[selected_img]);
     image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, ball.radius * 2, ball.radius * 2)
 
     speedball();
     physics();
     bounds();
 
-    //so sad that this does not work in function physics
     if (actionMade && !mouseheld) {
         ball.vy += gravity;
         if (ball.vx > 0) {
@@ -69,9 +79,6 @@ function draw() {  //---------------- start of draw ----------------------------
         if (ball.vx < friction && ball.vx > 0) {
             ball.vx = 0;
         }
-        /* currently aware of a bug with a friction causing some weird stuff to happen with the ball.vy, 
-        currently only an issue when friction is higher than 0.49
-        */
         if (ball.vy < 0) {
             ball.vy += friction;
         }
@@ -88,7 +95,12 @@ function draw() {  //---------------- start of draw ----------------------------
     }
     stroke(255);
     strokeWeight(0.5);
-    fill(130, 200, 255);
+    if (selected_img === 1) {
+        fill(20)
+    }
+    else {
+        fill(130, 200, 255);
+    }
     textSize(40);
     textAlign(CENTER);
     textFont('Courier New');
@@ -101,7 +113,7 @@ function draw() {  //---------------- start of draw ----------------------------
     text("S to speed up launch, L to lower it, and W for speed.", 10, 180);
     text("F to increase friction, f to lower it.", 10, 220);
     text("Click R to reset everything back to normal.", 10, 260);
-    text("Click i to change the ball.", 10, 300);
+    text("Click i to change the background.", 10, 300);
     text("Click B to increase ball's bounciness, b to lower it.", 10, 340);
 
     textSize(30);
@@ -139,7 +151,9 @@ function bounds() {
     if (ball.X > window.innerWidth - ball.radius) {
         ball.X -= ball.vx;
         ball.vx *= -1 * bounciness;
-        selected_ball++;
+        if (lasthitsurface !== "right") {
+            selected_ball++;
+        }
         lasthitsurface = "right";
         ball.X = window.innerWidth - ball.radius
     }
@@ -148,7 +162,9 @@ function bounds() {
         ball.X = 0 + ball.radius
         ball.X -= ball.vx;
         ball.vx *= -1 * bounciness;
-        selected_ball++;
+        if (lasthitsurface !== "left") {
+            selected_ball++;
+        }
         lasthitsurface = "left";
     }
 
@@ -221,9 +237,9 @@ function keyPressed() {
         }
     }
     else if (key === "I" || key === "i") {
-        selected_ball++;
-        if (selected_ball >= ballIMG.length) {
-            selected_ball = 0;
+        selected_img++
+        if (selected_img >= backgroundIMG.length) {
+            selected_img = 0;
         }
     }
     else if (key === "b") {
