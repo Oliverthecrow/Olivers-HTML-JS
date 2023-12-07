@@ -8,6 +8,13 @@ li {
     margin: 40px 0;
     position: relative;
     top: -75px;
+    width: 350px;
+    height: 50px;
+    -webkit-transition: color 1s;
+    -moz-transition:    color 1s;
+    -ms-transition:     color 1s;
+    -o-transition:      color 1s;
+    transition:         color 1s;
 }
 
 div {
@@ -17,7 +24,7 @@ div {
 
 body {
     background: url("BG.jpg") no-repeat center center fixed;
-    background-size: cover;
+    background-size: 100vw 100vh;
     width: auto;
     margin: 20px;
     font-size: 40px;
@@ -30,19 +37,81 @@ h1 {
 }
 
 a {
-    color: white
+    color: white;
+    -webkit-transition: color 1s;
+    -moz-transition:    color 1s;
+    -ms-transition:     color 1s;
+    -o-transition:      color 1s;
+    transition:         color 1s;
 }
+
+a:hover {
+    color: #13f097;
+}
+
+li:hover {
+    color: #13f097;
+}
+
 .border {
     position: relative;
     top: 0px;
     left: 20px;
     border: 6px;
     width: 400px;
-    height: 250px;
+    height: 300px;
     border-style: solid;
-    border-image: linear-gradient(to bottom, darkblue, cyan, black) 1;
+    border-image: linear-gradient(to bottom, #08295F, cyan, #001B30) 1;
     padding: 80px 80px;
     border-radius: 10px;
-    box-shadow: 10px 10px 3px #292726;
-    filter:blur(0.25rem)
+    box-shadow: 15px 15px 50px black, -5px -5px 50px whitesmoke;
+    filter: blur(0.05rem)
 }
+
+#box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 200px;
+    color: white;
+}
+
+.gradient-border {
+    --borderWidth: 15px;
+    background: rgba(0,0,0,0.8);
+    position: relative;
+    border-radius: var(--borderWidth);
+    top: -125vh;
+    right: -35vw;
+}
+
+.gradient-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #C19AB7, #9C95DC, #228CDB, #0B7189, #170A1C);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 250% 250%;
+    filter: blur(0.3rem);
+}
+
+@keyframes animatedgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
