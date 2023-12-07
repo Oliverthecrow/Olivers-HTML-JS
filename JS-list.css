@@ -169,7 +169,7 @@ li:hover {
     pointer-events: none;
     top: 0;
     left: 0;
-    border: 5px solid rgba(255, 255, 255, 0.3);
+    border: 5px solid #FF69B4;
     filter: blur(0.4rem);
     border-radius: 5%;
     width: 1px;

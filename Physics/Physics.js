@@ -12,6 +12,7 @@ let lineYlength = 0;
 let gravity = 0.5;
 let launchspeed = 0.05;
 let friction = 0.07;
+let bounciness = 0.75
 
 let timer;
 let Ballspeed = 0;
@@ -23,7 +24,13 @@ let ball = {
     radius: 50,
     vx: 0,
     vy: 0,
-}
+};
+document.addEventListener("DOMContentLoaded", function () {
+    let slider = document.getElementById("ballRadiusSlider");
+    slider.addEventListener("input", function () {
+        ball.radius = slider.value;
+    });
+});
 
 function setup() {
     ballIMG = [
@@ -44,7 +51,7 @@ function draw() {  //---------------- start of draw ----------------------------
     timer = millis();
 
     background(30);
-    image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, 100, 100)
+    image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, ball.radius * 2, ball.radius * 2)
 
     speedball();
     physics();
@@ -95,12 +102,15 @@ function draw() {  //---------------- start of draw ----------------------------
     text("F to increase friction, f to lower it.", 10, 220);
     text("Click R to reset everything back to normal.", 10, 260);
     text("Click i to change the ball.", 10, 300);
+    text("Click B to increase ball's bounciness, b to lower it.", 10, 340);
 
     textSize(30);
     textAlign(RIGHT);
     text("Gravity: " + Math.round(1000 * gravity) / 1000 + ".", window.innerWidth - 20, 120);
     text("Launch Speed: " + Math.round(1000 * launchspeed) / 1000 + ".", window.innerWidth - 20, 200);
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
+    text("Bounciness: " + Math.round(1000 * bounciness) / 1000 + ".", window.innerWidth - 20, 360);
+    text("Size: " + ball.radius, window.innerWidth - 20, 440)
 
     textSize(50)
     text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
@@ -111,39 +121,41 @@ function draw() {  //---------------- start of draw ----------------------------
 } //---------------- end of draw ----------------------------------------------------------------------------------------- //
 
 function incircle() {
-    if (mouseX < ball.X - 50 || mouseX > ball.X + 50) {
-        return false;
-    }
-    if (mouseY < ball.Y - 50 || mouseY > ball.Y + 50) {
-        return false;
-    }
-    return true;
+    let distance = dist(mouseX, mouseY, ball.X, ball.Y);
+    return distance <= ball.radius;
 }
 
 function bounds() {
     if (ball.Y > window.innerHeight - ball.radius) {
         ball.Y -= ball.vy;
-        ball.vy *= -0.75;
+        ball.vy *= -1 * bounciness;
         if (lasthitsurface !== "bottom") {
             selected_ball++;
         }
         lasthitsurface = "bottom";
+        ball.Y = window.innerHeight - ball.radius
     }
+
     if (ball.X > window.innerWidth - ball.radius) {
         ball.X -= ball.vx;
-        ball.vx *= -0.75;
+        ball.vx *= -1 * bounciness;
         selected_ball++;
         lasthitsurface = "right";
+        ball.X = window.innerWidth - ball.radius
     }
+
     if (ball.X < 0 + ball.radius) {
+        ball.X = 0 + ball.radius
         ball.X -= ball.vx;
-        ball.vx *= -0.75;
+        ball.vx *= -1 * bounciness;
         selected_ball++;
         lasthitsurface = "left";
     }
+
     if (ball.Y < 0 + ball.radius) {
+        ball.Y = 0 + ball.radius
         ball.Y -= ball.vy;
-        ball.vy *= -0.75;
+        ball.vy *= -1 * bounciness;
         if (lasthitsurface !== "top") {
             selected_ball++;
         }
@@ -194,6 +206,11 @@ function keyPressed() {
         launchspeed = 0.05;
         gravity = 0.5;
         friction = 0.07
+        bounciness = 0.75
+        ball.radius = 50
+        ball.Y = innerHeight / 2
+        ball.X = innerWidth / 2
+        slider.value = 50
     }
     else if (key === "F") {
         friction += 0.01;
@@ -207,6 +224,16 @@ function keyPressed() {
         selected_ball++;
         if (selected_ball >= ballIMG.length) {
             selected_ball = 0;
+        }
+    }
+    else if (key === "b") {
+        if (bounciness > 0) {
+            bounciness -= 0.05;
+        }
+    }
+    else if (key === "B") {
+        if (bounciness < 0.95) {
+            bounciness += 0.05;
         }
     }
 }

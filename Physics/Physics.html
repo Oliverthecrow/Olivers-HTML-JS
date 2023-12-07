@@ -2,7 +2,6 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-    <script src="Physics.js"></script>
     <style>
         body {
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -14,10 +13,31 @@
             left: 0px;
             top: 0px;
         }
+
+        .slidecontainer {
+            width: 100%;
+            position:absolute;
+            left: 250px;
+            top: 10px;
+        }
+        p {
+            position: absolute;
+            top: -10px;
+            left: 25px;
+            font-size: 20px;
+            color: lightskyblue;
+        }
     </style>
 </head>
 
 <body>
-    <div id="PhysicsCanvas"></div>
+    <div id="PhysicsCanvas">
+    <div class = "slidecontainer">
+    <p>Size Slider</p>
+    <input id="ballRadiusSlider" type = "range" min="5" max="450" value = "50"> 
+    </div>
     <a href="../index.html" style="position: absolute; top: -5px;color: lightskyblue">Home</a>
+
+    <script src="Physics.js"></script>
+    </div>
 </body>
