@@ -211,19 +211,19 @@ function endscene() {
     else if (!isHuman && isGood && !isBitten && !isFemale && isGod && !isGreen) {
         text("Loki", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
-        selected_img = 8;
+        selected_img = 10;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (isHuman && isGood ** !isBitten && !isFemale && !isGod && !isGreen) {
         text("Captain America!", window.innerWidth / 2, window.innerHeigth / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
-        selected_img = 9;
+        selected_img = 8;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (isHuman && isGood && !isBitten && !isFemale && !isGod && isGreen) {
         text("Hulk!", window.innerWidth / 2, window.innerHeight / 2)
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
-        selected_img = 10;
+        selected_img = 9;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else {
