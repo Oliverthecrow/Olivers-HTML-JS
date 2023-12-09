@@ -21,7 +21,7 @@ let timer;
 let Ballspeed = 0;
 let RBallspeed = 0;
 
-let timeScale = 1;
+let timeScale = 60;
 
 let ball = {
     X: window.innerWidth / 2,
@@ -73,32 +73,36 @@ function setup() {
 }
 
 function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
+    frameRate(dynamicFrameRate);
+    let deltaTime = (millis() - timer) / 1000 * timeScale;
+
     timer = millis();
 
     background(backgroundIMG[selected_img]);
     image(ballIMG[selected_ball], ball.X - ball.radius, ball.Y - ball.radius, ball.radius * 2, ball.radius * 2)
 
     speedball();
-    physics();
     bounds();
 
     if (actionMade && !mouseheld) {
-        ball.vy += gravity * timeScale;
+        ball.vy += gravity * deltaTime;
         if (ball.vx > 0) {
-            ball.vx -= friction * timeScale;
+            ball.vx -= friction * deltaTime;
         }
         if (ball.vx < 0) {
-            ball.vx += friction * timeScale;
+            ball.vx += friction * deltaTime;
         }
         if (ball.vx < friction && ball.vx > 0) {
             ball.vx = 0;
         }
         if (ball.vy < 0) {
-            ball.vy += friction * timeScale;
+            ball.vy += friction * deltaTime;
         }
         if (ball.vy > 0) {
-            ball.vy -= friction * timeScale;
+            ball.vy -= friction * deltaTime;
         }
+        ball.Y += ball.vy * deltaTime;
+        ball.X += ball.vx * deltaTime;
     }
 
     if (mouseheld) {
@@ -267,10 +271,6 @@ function keyPressed() {
             bounciness += 0.05;
         }
     }
-}
-function physics() {
-    ball.Y += ball.vy;
-    ball.X += ball.vx;
 }
 
 function speedball() {
