@@ -21,7 +21,7 @@ let timer;
 let Ballspeed = 0;
 let RBallspeed = 0;
 
-let SimulationFrameRate = 60;
+let timeScale = 1;
 
 let ball = {
     X: window.innerWidth / 2,
@@ -38,10 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+let simulationSpeedSlider;
+let dynamicFrameRate = 60;
+
 document.addEventListener("DOMContentLoaded", function () {
-    let slider = document.getElementById("SimulationSpeedSlider");
-    slider.addEventListener("input", function () {
-        SimulationFrameRate = slider.value
+    simulationSpeedSlider = document.getElementById("SimulationSpeedSlider");
+    simulationSpeedSlider.addEventListener("input", function () {
+        timeScale = float(simulationSpeedSlider.value);
     });
 });
 
@@ -70,7 +73,6 @@ function setup() {
 }
 
 function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
-
     timer = millis();
 
     background(backgroundIMG[selected_img]);
@@ -81,21 +83,21 @@ function draw() {  //---------------- start of draw ----------------------------
     bounds();
 
     if (actionMade && !mouseheld) {
-        ball.vy += gravity;
+        ball.vy += gravity * timeScale;
         if (ball.vx > 0) {
-            ball.vx -= friction;
+            ball.vx -= friction * timeScale;
         }
         if (ball.vx < 0) {
-            ball.vx += friction;
+            ball.vx += friction * timeScale;
         }
         if (ball.vx < friction && ball.vx > 0) {
             ball.vx = 0;
         }
         if (ball.vy < 0) {
-            ball.vy += friction;
+            ball.vy += friction * timeScale;
         }
         if (ball.vy > 0) {
-            ball.vy -= friction;
+            ball.vy -= friction * timeScale;
         }
     }
 
@@ -135,8 +137,7 @@ function draw() {  //---------------- start of draw ----------------------------
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
     text("Bounciness: " + Math.round(1000 * bounciness) / 1000 + ".", window.innerWidth - 20, 360);
     text("Size: " + ball.radius, window.innerWidth - 20, 440)
-    text("Simulation Speed (FPS): " + SimulationFrameRate, windowWidth - 20, 520)
-
+    text("Simulation Speed: " + timeScale, windowWidth - 20, 520)
 
     textSize(50)
     text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
