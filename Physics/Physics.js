@@ -21,6 +21,8 @@ let timer;
 let Ballspeed = 0;
 let RBallspeed = 0;
 
+let SimulationFrameRate = 60;
+
 let ball = {
     X: window.innerWidth / 2,
     Y: window.innerHeight / 4,
@@ -35,6 +37,14 @@ document.addEventListener("DOMContentLoaded", function () {
         ball.radius = slider.value;
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    let slider = document.getElementById("SimulationSpeedSlider");
+    slider.addEventListener("input", function () {
+        SimulationFrameRate = slider.value
+    });
+});
+
 
 function setup() {
     ballIMG = [
@@ -56,9 +66,11 @@ function setup() {
     sketch.parent("PhysicsCanvas");
     strokeWeight(0);
     stroke(255);
+
 }
 
 function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
+
     timer = millis();
 
     background(backgroundIMG[selected_img]);
@@ -123,6 +135,8 @@ function draw() {  //---------------- start of draw ----------------------------
     text("Friction: " + Math.round(1000 * friction) / 1000 + ".", window.innerWidth - 20, 280);
     text("Bounciness: " + Math.round(1000 * bounciness) / 1000 + ".", window.innerWidth - 20, 360);
     text("Size: " + ball.radius, window.innerWidth - 20, 440)
+    text("Simulation Speed (FPS): " + SimulationFrameRate, windowWidth - 20, 520)
+
 
     textSize(50)
     text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
@@ -253,7 +267,6 @@ function keyPressed() {
         }
     }
 }
-
 function physics() {
     ball.Y += ball.vy;
     ball.X += ball.vx;
