@@ -16,6 +16,11 @@ li {
   margin: 40px 0;
   position: relative;
   top: -75px;
+  -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
 }
 
 .head2 {
@@ -53,7 +58,12 @@ li {
 }
 
 a {
-  color: #ffffff
+  color: white;
+  -webkit-transition: color 1s;
+  -moz-transition: color 1s;
+  -ms-transition: color 1s;
+  -o-transition: color 1s;
+  transition: color 1s;
 }
 
 ol {
@@ -88,4 +98,13 @@ button {
   position: absolute;
   top: 410px;
   right: 40px;
+}
+a:hover {
+  color: #13f097;
+  text-shadow: 0 0 10px #13f097, 0 0 20px #13f097, 0 0 30px #13f097, 0 0 40px #13f097;
+}
+
+li:hover {
+  color: #13f097;
+  text-shadow: 0 0 10px #13f097, 0 0 20px #13f097, 0 0 30px #13f097, 0 0 40px #13f097;
 }

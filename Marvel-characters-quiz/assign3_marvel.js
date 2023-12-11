@@ -184,25 +184,25 @@ function endscene() {
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (!isHuman && !isGood && !isBitten && !isFemale && !isGod && !isGreen) {
-        text("Thanos!", window.innerWidth / 2, window.innerHeigth / 2);
+        text("Thanos!", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
         selected_img = 7;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (!isHuman && isGood && !isBitten && !isFemale && !isGod && !isGreen) {
-        text("Groot!", window.innerWidth / 2, window.innerHeigth / 2);
+        text("Groot!", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
         selected_img = 1;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (!isHuman && isGood && !isBitten && isFemale && !isGod && isGreen) {
-        text("Gamora!", window.innerWidth / 2, window.innerHeigth / 2);
+        text("Gamora!", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
         selected_img = 5;
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (isHuman && isGood && !isBitten && isFemale && !isGod && !isGreen) {
-        text("Captain Marvel!", window.innerWidth / 2, window.innerHeigth / 2);
+        text("Captain Marvel!", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
         selected_img = 4;
         image(img[selected_img], 200, 200, 350, 350);
@@ -215,7 +215,7 @@ function endscene() {
         image(img[selected_img], 200, 200, 350, 350);
     }
     else if (isHuman && isGood ** !isBitten && !isFemale && !isGod && !isGreen) {
-        text("Captain America!", window.innerWidth / 2, window.innerHeigth / 2);
+        text("Captain America!", window.innerWidth / 2, window.innerHeight / 2);
         text("Click anywhere to retake test", window.innerWidth / 2, window.innerHeight / 2 + 100);
         selected_img = 8;
         image(img[selected_img], 200, 200, 350, 350);

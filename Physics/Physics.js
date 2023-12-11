@@ -73,9 +73,7 @@ function setup() {
 }
 
 function draw() {  //---------------- start of draw ---------------------------------------------------------------- //
-    frameRate(dynamicFrameRate);
     let deltaTime = (millis() - timer) / 1000 * timeScale;
-
     timer = millis();
 
     background(backgroundIMG[selected_img]);
@@ -84,6 +82,7 @@ function draw() {  //---------------- start of draw ----------------------------
     speedball();
     bounds();
 
+    //why this does not work in a function, idk, seems to think deltatime is not defined.
     if (actionMade && !mouseheld) {
         ball.vy += gravity * deltaTime;
         if (ball.vx > 0) {
@@ -242,6 +241,7 @@ function keyPressed() {
         gravity = 0.5;
         friction = 0.07
         bounciness = 0.75
+        actionMade = false;
         ball.radius = 50
         ball.Y = innerHeight / 2
         ball.X = innerWidth / 2
