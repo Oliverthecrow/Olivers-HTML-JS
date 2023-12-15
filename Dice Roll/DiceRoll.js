@@ -39,20 +39,20 @@ function setup() {
     sketch.parent("CasinoCanvas");
 
     Pdie = [
-        one = loadImage('one.png'), //0
-        two = loadImage('two.png'), //1
-        three = loadImage('3.svg'), //2
-        four = loadImage('4.svg'), //3
-        five = loadImage('5.png'), //4
-        six = loadImage('6.png'), //5
+        loadImage('one.png'), //0
+        loadImage('two.png'), //1
+        loadImage('3.svg'), //2
+        loadImage('4.svg'), //3
+        loadImage('5.png'), //4
+        loadImage('6.png'), //5
     ];
     Cdie = [
-        one1 = loadImage('one.png'), //0
-        two1 = loadImage('two.png'), //1
-        three1 = loadImage('3.svg'), //2
-        four1 = loadImage('4.svg'), //3
-        five1 = loadImage('5.png'), //4
-        six1 = loadImage('6.png'), //5
+        loadImage('one.png'), //0
+        loadImage('two.png'), //1
+        loadImage('3.svg'), //2
+        loadImage('4.svg'), //3
+        loadImage('5.png'), //4
+        loadImage('6.png'), //5
     ];
     imageMode(CENTER)
     rectMode(CENTER)
@@ -93,7 +93,7 @@ function draw() { //-------------------------------------------------- START OF 
     text("Current Bet: " + Math.round(100 * BET) / 100, window.innerWidth / 7, window.innerHeight / 1.15)
 
     fill(255, 0, 0)
-    if (Balance <= 0) { text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN \n OR R TO RESART", window.innerWidth / 2, window.innerHeight / 2) }
+    if (Balance <= 3) { text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN \n OR R TO RESART", window.innerWidth / 2, window.innerHeight / 2) }
 } //---------------------------------------------------------------- END OF DRAW -----------------------------------------------------//
 function keyPressed() {
 
@@ -110,6 +110,17 @@ function keyPressed() {
             previousrollC = selected_C;
             selected_C = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
             hasrolledC = true;
+        }
+    }
+    if (!hasrolledC && !hasrolledP) {
+        if (key === " " ) {
+            Balance -= BET;
+            previousrollC = selected_C;
+            previousrollP = selected_P;
+            selected_P = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
+            selected_C = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
+            hasrolledC = true;  
+            hasrolledP = true;
         }
     }
     if (hasrolledC && hasrolledP) {
