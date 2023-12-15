@@ -82,7 +82,7 @@ function draw() {  //---------------- start of draw ----------------------------
     speedball();
     bounds();
 
-    //why this does not work in a function, idk, seems to think deltatime is not defined.
+    //why this does not work in a function, idk.
     if (actionMade && !mouseheld) {
         ball.vy += gravity * deltaTime;
         if (ball.vx > 0) {
