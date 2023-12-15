@@ -34,8 +34,8 @@ h1:hover {
     text-shadow: 8px 8px 50px darkgoldenrod, -8px -8px 50px darkgoldenrod
 }
 .right {
-    position: relative;
-    top: -410px;
+    position: absolute;
+    top:  10px;
     left: 1275px;
 }
 body {
@@ -48,7 +48,8 @@ p {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    top: -175px;
+    margin-bottom: -7px;
+    top: -200px;
 
 }
 input[type="range"] {

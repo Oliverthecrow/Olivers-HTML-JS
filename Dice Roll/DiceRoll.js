@@ -10,7 +10,15 @@ var Balance = 1500;
 let PRoll = 0;
 let CRoll = 0;
 let checked = false;
+
+let previousrollP = 0;
+let previousrollC = 0;
+
 let DEBT = 0;
+let interestRate = 0.022;
+let totalLoanAmount = 0;
+setInterval(interest, 1000);
+
 let BET;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -68,7 +76,9 @@ function draw() { //-------------------------------------------------- START OF 
     strokeWeight(0)
     text("Player's Dice", window.innerWidth / 3, window.innerHeight / 3.4);
     text("Casino's Dice", window.innerWidth / 1.5, window.innerHeight / 3.4)
-    text("DEBT: " + DEBT,150,window.innerHeight/2)
+    textAlign(LEFT)
+    text("DEBT: " + Math.round(100 * DEBT) / 100, 25, window.innerHeight / 2)
+    textAlign(CENTER)
     if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.35) }
     if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.35) }
 
@@ -82,25 +92,32 @@ function draw() { //-------------------------------------------------- START OF 
     text("Your Balance: " + Math.round(100 * Balance) / 100, window.innerWidth - 300, window.innerHeight / 1.15)
     text("Current Bet: " + Math.round(100 * BET) / 100, window.innerWidth / 7, window.innerHeight / 1.15)
 
-    fill(255,0,0)
-    if(Balance <= 0){ text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN",window.innerWidth/2,window.innerHeight/2)}
+    fill(255, 0, 0)
+    if (Balance <= 0) { text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN \n OR R TO RESART", window.innerWidth / 2, window.innerHeight / 2) }
 } //---------------------------------------------------------------- END OF DRAW -----------------------------------------------------//
 function keyPressed() {
+
     if (!hasrolledP) {
         if (key === "p" || key === "P") {
+            Balance -= BET;
+            previousrollP = selected_P;
             selected_P = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
             hasrolledP = true;
-            Balance -= BET
         }
     }
     if (!hasrolledC) {
         if (key === "c" || key === "C") {
+            previousrollC = selected_C;
             selected_C = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
             hasrolledC = true;
         }
     }
     if (hasrolledC && hasrolledP) {
-        if (selected_P > selected_C) {
+        if (selected_P === previousrollP && selected_C === previousrollC) {
+            Balance += BET * 10;
+            Gained = BET * 10;
+        }
+        else if (selected_P > selected_C) {
             Balance += BET * 0.25;
             Gained = BET * 0.25;
         }
@@ -117,10 +134,27 @@ function keyPressed() {
         hasrolledC = false;
         hasrolledP = false;
     }
-    else if(key === "L") {
+    else if (key === "L" || key === "l") {
         DEBT += 3000;
         Balance += 3000;
-        slider.max = Balance
+        slider.max = Balance;
+    }
+    else if (key === "R" || key === "r") {
+        if (Balance <= 0) {
+            DEBT = 0;
+            Balance = 1500;
+        }
+    }
+    console.log("selected_P:", selected_P);
+    console.log("selected_C:", selected_C);
+    console.log("BET:", BET);
+}
+function interest() {
+    if (DEBT > 0) {
+        let interestAmount = DEBT * interestRate;
+        DEBT -= interestAmount;
+        Balance -= interestAmount * 1.05;
+        totalLoanAmount += interestAmount;
     }
 }
 function windowResized() {
