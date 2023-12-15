@@ -15,9 +15,9 @@ let previousrollP = 0;
 let previousrollC = 0;
 
 let DEBT = 0;
-let interestRate = 0.022;
+let interestRate = 0.015;
 let totalLoanAmount = 0;
-setInterval(interest, 1000);
+setInterval(interest, 2000);
 
 let BET;
 
@@ -59,6 +59,7 @@ function setup() {
     textAlign(CENTER)
 
     textSize(30)
+    BET = 0;
 }
 function draw() { //-------------------------------------------------- START OF DRAW -------------------------------------------//
     background(40);
@@ -69,31 +70,43 @@ function draw() { //-------------------------------------------------- START OF 
     fill(0, 0, 0, 0);
     stroke(0);
     strokeWeight(2);
-    rect(window.innerWidth / 3, window.innerHeight / 2, 350, 350);
-    rect(window.innerWidth / 1.5, window.innerHeight / 2, 350, 350);
+    rect(window.innerWidth / 3, window.innerHeight / 1.9, 350, 350);
+    rect(window.innerWidth / 1.5, window.innerHeight / 1.9, 350, 350);
 
     fill(255)
     strokeWeight(0)
-    text("Player's Dice", window.innerWidth / 3, window.innerHeight / 3.4);
-    text("Casino's Dice", window.innerWidth / 1.5, window.innerHeight / 3.4)
-    textAlign(LEFT)
-    text("DEBT: " + Math.round(100 * DEBT) / 100, 25, window.innerHeight / 2)
+    text("Player's Dice", window.innerWidth / 3, window.innerHeight / 3.2);
+    text("Casino's Dice", window.innerWidth / 1.5, window.innerHeight / 3.2)
     textAlign(CENTER)
-    if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.35) }
-    if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.35) }
+    textSize(18)
+    text("Click L to take out Loan", window.innerWidth - 300, window.innerHeight / 1.2)
+    textSize(50)
+    text("DEBT: " + Math.round(100 * DEBT) / 100, window.innerWidth - 300, window.innerHeight / 1.13)
+    textAlign(CENTER)
+    if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.3) }
+    if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.3) }
 
-    image(Pdie[selected_P], window.innerWidth / 3, window.innerHeight / 2, 350, 350);
-    image(Cdie[selected_C], window.innerWidth / 1.5, window.innerHeight / 2, 350, 350);
+    image(Pdie[selected_P], window.innerWidth / 3, window.innerHeight / 1.9, 350, 350);
+    image(Cdie[selected_C], window.innerWidth / 1.5, window.innerHeight / 1.9, 350, 350);
 
 
     textSize(50)
-    if (checked) { text("You Won $" + Math.round(100 * Gained) / 100, window.innerWidth / 2, window.innerHeight / 1.15) }
+    if (checked) {
+        text("You Won $" + Math.round(100 * Gained) / 100, window.innerWidth / 2, window.innerHeight / 1.05)
+        if (previousrollC === selected_C && previousrollP === selected_P) {
+            text("YOU WON IT BIG!!!", window.innerWidth / 2, window.innerHeight / 1.15)
+        }
+    }
 
-    text("Your Balance: " + Math.round(100 * Balance) / 100, window.innerWidth - 300, window.innerHeight / 1.15)
+    text("Your Balance: " + Math.round(100 * Balance) / 100, window.innerWidth - 300, window.innerHeight / 1.05)
     text("Current Bet: " + Math.round(100 * BET) / 100, window.innerWidth / 7, window.innerHeight / 1.15)
 
     fill(255, 0, 0)
     if (Balance <= 3) { text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN \n OR R TO RESART", window.innerWidth / 2, window.innerHeight / 2) }
+
+    fill(255)
+    text("Previous Roll:" + (previousrollP + 1), window.innerWidth / 3, window.innerHeight / 1.3)
+    text("Previous Roll:" + (previousrollC + 1), window.innerWidth / 1.5, window.innerHeight / 1.3)
 } //---------------------------------------------------------------- END OF DRAW -----------------------------------------------------//
 function keyPressed() {
 
@@ -113,20 +126,20 @@ function keyPressed() {
         }
     }
     if (!hasrolledC && !hasrolledP) {
-        if (key === " " ) {
+        if (key === " ") {
             Balance -= BET;
             previousrollC = selected_C;
             previousrollP = selected_P;
             selected_P = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
             selected_C = Math.floor(Math.random() * ((5 - 0) + 1) + 0);
-            hasrolledC = true;  
+            hasrolledC = true;
             hasrolledP = true;
         }
     }
     if (hasrolledC && hasrolledP) {
         if (selected_P === previousrollP && selected_C === previousrollC) {
-            Balance += BET * 10;
-            Gained = BET * 10;
+            Balance += BET * 20;
+            Gained = BET * 20;
         }
         else if (selected_P > selected_C) {
             Balance += BET * 0.25;
@@ -151,7 +164,7 @@ function keyPressed() {
         slider.max = Balance;
     }
     else if (key === "R" || key === "r") {
-        if (Balance <= 0) {
+        if (Balance <= 3) {
             DEBT = 0;
             Balance = 1500;
         }
