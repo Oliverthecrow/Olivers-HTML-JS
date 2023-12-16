@@ -17,7 +17,8 @@ let previousrollC = 0;
 let DEBT = 0;
 let interestRate = 0.015;
 let totalLoanAmount = 0;
-setInterval(interest, 2000);
+setInterval(interest, 1000);
+let IntMoment = 1.05;
 
 let BET;
 
@@ -79,9 +80,10 @@ function draw() { //-------------------------------------------------- START OF 
     text("Casino's Dice", window.innerWidth / 1.5, window.innerHeight / 3.2)
     textAlign(CENTER)
     textSize(18)
-    text("Click L to take out Loan", window.innerWidth - 300, window.innerHeight / 1.2)
+    text("Click L to take out Loan", window.innerWidth - 300, window.innerHeight / 1.23)
+    textSize(45)
+    text("DEBT: " + Math.round(100 * DEBT) / 100, window.innerWidth - 300, window.innerHeight / 1.11)
     textSize(50)
-    text("DEBT: " + Math.round(100 * DEBT) / 100, window.innerWidth - 300, window.innerHeight / 1.13)
     textAlign(CENTER)
     if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.3) }
     if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.3) }
@@ -100,7 +102,9 @@ function draw() { //-------------------------------------------------- START OF 
 
     text("Your Balance: " + Math.round(100 * Balance) / 100, window.innerWidth - 300, window.innerHeight / 1.05)
     text("Current Bet: " + Math.round(100 * BET) / 100, window.innerWidth / 7, window.innerHeight / 1.15)
-
+    textSize(22)
+    text("Current Interest Rate: " + Math.round(10000 * IntMoment) / 10000,window.innerWidth / 1.21,window.innerHeight / 1.18)
+    textSize(50)
     fill(255, 0, 0)
     if (Balance <= 3) { text("YOU ARE BANKRUPT,  CLICK L TO TAKE OUT LOAN \n OR R TO RESART", window.innerWidth / 2, window.innerHeight / 2) }
 
@@ -161,6 +165,7 @@ function keyPressed() {
     else if (key === "L" || key === "l") {
         DEBT += 3000;
         Balance += 3000;
+        IntMoment += 0.015
         slider.max = Balance;
     }
     else if (key === "R" || key === "r") {
@@ -174,11 +179,12 @@ function keyPressed() {
     console.log("BET:", BET);
 }
 function interest() {
-    if (DEBT > 0) {
+    if (Math.round(100 * DEBT) /100 > 0) {
         let interestAmount = DEBT * interestRate;
         DEBT -= interestAmount;
-        Balance -= interestAmount * 1.05;
+        Balance -= interestAmount * IntMoment;
         totalLoanAmount += interestAmount;
+        IntMoment += 0.0001
     }
 }
 function windowResized() {

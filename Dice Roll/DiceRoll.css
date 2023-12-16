@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 img {
-    position: relative;
+    position: absolute;
     top: 5px;
-    left: 525px;
+    left: 475px;
     width: 100px;
     height: 100px;
 }
@@ -20,8 +20,9 @@ img:hover {
     box-shadow: 15px 15px 100px green, -15px -15px 100px red;
 }
 h1 {
-    position: relative;
-    top: -150px;
+    position: absolute;
+    top: -50px;
+    left: 550px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -36,7 +37,7 @@ h1:hover {
 .right {
     position: absolute;
     top:  10px;
-    left: 1275px;
+    left: 1170px;
 }
 body {
     font-family: 'Roboto Condensed', sans-serif;
@@ -49,7 +50,7 @@ p {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -7px;
-    top: -200px;
+    top: 90px;
 
 }
 input[type="range"] {
