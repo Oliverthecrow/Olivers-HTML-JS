@@ -15,6 +15,12 @@ li {
     -ms-transition: color 1s;
     -o-transition: color 1s;
     transition: color 1s;
+    -webkit-transition: text-shadow 1s;
+    -moz-transition: text-shadow 1s;
+    -ms-transition: text-shadow 1s;
+    -o-transition: text-shadow 1s;
+    transition: text-shadow 1s;
+
 }
 
 div {
@@ -89,6 +95,12 @@ a {
     -ms-transition: color 1s;
     -o-transition: color 1s;
     transition: color 1s;
+    -webkit-transition: text-shadow 1s;
+    -moz-transition: text-shadow 1s;
+    -ms-transition: text-shadow 1s;
+    -o-transition: text-shadow 1s;
+    transition: text-shadow 1s;
+
 }
 
 a:hover {
@@ -111,7 +123,7 @@ li:hover {
     border-style: solid;
     border-image: linear-gradient(to bottom, #08295F, cyan, #001B30) 1;
     background: rgba(0, 0, 0, 0.3);
-    padding: 80px 80px;
+    padding: 70px 80px;
     border-radius: 10px;
     box-shadow: 15px 15px 50px black, -5px -5px 50px whitesmoke;
     filter: blur(0.05rem)
