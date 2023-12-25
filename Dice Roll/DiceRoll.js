@@ -85,8 +85,8 @@ function draw() { //-------------------------------------------------- START OF 
     text("DEBT: " + Math.round(100 * DEBT) / 100, window.innerWidth - 300, window.innerHeight / 1.11)
     textSize(50)
     textAlign(CENTER)
-    if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.3) }
-    if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.3) }
+    if (hasrolledP) { text("You have Rolled", window.innerWidth / 3, window.innerHeight / 1.2) }
+    if (hasrolledC) { text("The Casino has Rolled", window.innerWidth / 1.5, window.innerHeight / 1.2) }
 
     image(Pdie[selected_P], window.innerWidth / 3, window.innerHeight / 1.9, 350, 350);
     image(Cdie[selected_C], window.innerWidth / 1.5, window.innerHeight / 1.9, 350, 350);

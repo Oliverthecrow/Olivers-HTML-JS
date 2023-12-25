@@ -90,7 +90,7 @@ p {
 .bottom-left {
     position: relative;
     font-size: 32px;
-    top: 65vh;
+    top: 63vh;
     left: -22vw;
 }
 p:hover {

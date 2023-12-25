@@ -79,7 +79,7 @@ function draw() { //----------------------------------------------Start of Draw 
         image(paper, paperX, halfY, papersize + 100, papersize);
         image(scissor, scissorX, halfY, scissorsize, scissorsize);
     }
-    //moves things to where they are supposed to go over time 
+    //moves things to where they are supposed to go over time.
     else if (player1input === "rock") {
         image(rock, rockX, halfY, 500, 500);
     }
@@ -120,7 +120,7 @@ function draw() { //----------------------------------------------Start of Draw 
     }
 
 } //--------------------------------------------------------------End of Draw -------------------------------------------------------//
-// checks to see if on specific choice
+// checks to see if on specific choice.
 function bounds() {
     if (chosen === false) {
         if (mouseX > (rockX) / 2 && mouseX < (rockX) * 1.5 && mouseY > (halfY) / 1.3 && mouseY < (halfY) * 1.3) {
@@ -148,7 +148,7 @@ function bounds() {
         else { if (scissorsize >= 400) { scissorsize -= 8.5 }; onscissor = false; }
     }
 }
-//allows user to select only one choice then makes "player 2" choose randomly from the choices
+//allows user to select only one choice then makes "player 2" choose randomly from the choices.
 function mousePressed() {
     if (chosen === false) {
         if (onrock === true) {
@@ -173,7 +173,7 @@ function mousePressed() {
         }
     }
 }
-//resets stuff back to normal when hitting space
+//resets stuff back to normal when hitting space.
 function keyPressed() {
     if (chosen) {
         if (key === " ") {
@@ -205,6 +205,7 @@ function keyPressed() {
             chosen = true;
             scoregiven = false;
         }
+        //stuff for player 2 when using keys instead of mouse.
         if (player1input === "scissor" || player1input === "paper" || player1input === "rock") {
             selected_img = Math.floor(Math.random() * ((2 - 0) + 1) + 0);
             player2assigner();
@@ -212,12 +213,12 @@ function keyPressed() {
         }
     }
 }
-/* this stops the page from scrolling when hetting space, by returning on any keypress that it is not " "/space,
+/* this stops the page from scrolling when hitting space, by returning on any keypress that it is not " "/space,
    other things using space still work such as reseting variables as long as they are placed before this function. */
 window.onkeydown = function stopscroll() {
     return !(key = " ")
 }
-//uses math above to give the correct choice to player 2 input
+//uses math above to give the correct choice to player 2 input.
 function player2assigner() {
     if (selected_hint === 5) {
         player2input = "rock"
@@ -268,7 +269,6 @@ function winconditions() {
         scoregiven = true
         return "You Lose";
     }
-
     else if (player1input === "scissor" && player2input === "rock") {
         if (scoregiven === false) { score--; botscore ++;}
         scoregiven = true
