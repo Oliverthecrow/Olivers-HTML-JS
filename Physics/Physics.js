@@ -38,16 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-let simulationSpeedSlider;
-let dynamicFrameRate = 60;
-
 document.addEventListener("DOMContentLoaded", function () {
-    simulationSpeedSlider = document.getElementById("SimulationSpeedSlider");
+    let simulationSpeedSlider = document.getElementById("SimulationSpeedSlider");
     simulationSpeedSlider.addEventListener("input", function () {
         timeScale = float(simulationSpeedSlider.value);
     });
 });
-
+// wooooooooooo sliders
 
 function setup() {
     ballIMG = [
@@ -143,7 +140,8 @@ function draw() {  //---------------- start of draw ----------------------------
     text("Simulation Speed: " + timeScale, windowWidth - 20, 520)
 
     textSize(50)
-    text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25);
+    if (RBallspeed < 1) { text("Current ball speed: " + "0", window.innerWidth - 20, window.innerHeight - 25); }
+    else { text("Current ball speed: " + RBallspeed, window.innerWidth - 20, window.innerHeight - 25); }
 
     if (selected_ball >= ballIMG.length) {
         selected_ball = 0;
@@ -156,6 +154,9 @@ function incircle() {
 }
 
 function bounds() {
+
+    //add sounds when hitting border (reminder)
+
     if (ball.Y > window.innerHeight - ball.radius) {
         ball.Y -= ball.vy;
         ball.vy *= -1 * bounciness;
@@ -270,6 +271,9 @@ function keyPressed() {
         if (bounciness < 0.95) {
             bounciness += 0.05;
         }
+    }
+    else if (key === "D" || key === "d") {
+        //either spawn new ball or allow drawing new shapes to enviornment.
     }
 }
 

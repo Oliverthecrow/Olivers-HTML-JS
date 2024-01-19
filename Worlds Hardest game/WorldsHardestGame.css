@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background: black;
+    font-size: 45px;
+}
+a {
+    color: whitesmoke;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    text-shadow: 1px 1px 20px gainsboro, -1px -1px 20px gainsboro;
+    -webkit-transition: text-shadow 1.5s;
+    -moz-transition: text-shadow 1.5s;
+    -ms-transition: text-shadow 1.5s;
+    -o-transition: text-shadow 1.5s;
+    transition: text-shadow 1.5s;
+    -webkit-transition: color 1.5s;
+    -moz-transition: color 1.5s;
+    -ms-transition: color 1.5s;
+    -o-transition: color 1.5s;
+    transition: color 1.5s;
+    -webkit-transition: font-size 1.5s;
+    -moz-transition: font-size 1.5s;
+    -ms-transition: font-size 1.5s;
+    -o-transition: font-size 1.5s;
+    transition: font-size 1.5s;
+
+}
+a:hover {
+    font-size: 60px;
+    color: antiquewhite;
+    text-shadow: 4px 4px 20px wheat, -4px -4px 20px wheat;
+}
+h1 {
+    position: absolute;
+    font-size: 90px;
+    color: pink;
+    text-shadow: 6px 6px 75px palevioletred, -6px -6px 75px palevioletred;
+    left: 30vw;
+    top: 15vh;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-transition: text-shadow 1.5s;
+    -moz-transition: text-shadow 1.5s;
+    -ms-transition: text-shadow 1.5s;
+    -o-transition: text-shadow 1.5s;
+    transition: text-shadow 1.5s;
+}
+h1:hover {
+    text-shadow: 6px 6px 25px paleturquoise, -6px -6px 25px paleturquoise;
+}
+p {
+    font-size: 60px;
+    color: white;
+    text-shadow: 2px 2px 10px plum, -2px -2px 10px plum;
+    top: 32vh;
+    position: absolute;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 41vw;
+    width: 300px;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-transition: color 1.5s;
+    -moz-transition: color 1.5s;
+    -ms-transition: color 1.5s;
+    -o-transition: color 1.5s;
+    transition: color 1.5s;
+    -webkit-transition: text-shadow 1.5s;
+    -moz-transition: text-shadow 1.5s;
+    -ms-transition: text-shadow 1.5s;
+    -o-transition: text-shadow 1.5s;
+    transition: text-shadow 1.5s;
+}
+.instruction {
+    font-size: 25px;
+    color: white;
+    text-shadow: 4px 4px 25px plum, -4px -4px 25px plum;
+    top: 35vh;
+    position: absolute;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 2vw;
+    width: 225px;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-transition: color 1.5s;
+    -moz-transition: color 1.5s;
+    -ms-transition: color 1.5s;
+    -o-transition: color 1.5s;
+    transition: color 1.5s;
+    -webkit-transition: text-shadow 1.5s;
+    -moz-transition: text-shadow 1.5s;
+    -ms-transition: text-shadow 1.5s;
+    -o-transition: text-shadow 1.5s;
+    transition: text-shadow 1.5s;
+}
+p:hover {
+    text-shadow: 6px 6px 25px paleturquoise, -6px -6px 25px paleturquoise;
+}
+div {
+    display: inline;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#TIMER {
+    position: absolute;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 27.5vw;
+    top: 60vh;
+    width: 800px;
+    font-size: 60px;
+}
+#goal {
+    position: absolute;
+    left: 45px;
+    top: 40vh;
+    width: 200px;
+    height: 300px;
+    background-color: lime;
+    box-shadow: 5px 5px 20px palegreen, -5px -5px 20px palegreen;
+}
+.background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.orbs {
+    position: relative;
+    display: flex;
+    z-index: -100;
+}
+.orbs span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #76d11b;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 10px #5a664d, 1px 1px 50px #76d11b, 1px 1px 100px #76d11b,;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(100s / var(--i));
+}
+.orbs span:nth-child(even) {
+    background: #e0124c;
+    box-shadow: 1px 1px 10px #750c2a, 1px 1px 50px #e0124c, 1px 1px 100px #e0124c,;
+}
+@keyframes animate {
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+    100% {
+        transform: translateY(-10vh) scale(1);
+    }
+}
