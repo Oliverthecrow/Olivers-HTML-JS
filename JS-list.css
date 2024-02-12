@@ -3,13 +3,20 @@ ol {
     top: 50px;
     left: 50px;
 }
+p {
+    position: relative;
+    font-size: 50px;
+    top: -780px;
+    left: -25px;
+}
 
 li {
     margin: 40px 0px;
     position: relative;
-    top: -225px;
+    top: -800px;
     width: 400px;
     height: 50px;
+    left: 20px;
     -webkit-transition: color 1s;
     -moz-transition: color 1s;
     -ms-transition: color 1s;
@@ -20,7 +27,6 @@ li {
     -ms-transition: text-shadow 1s;
     -o-transition: text-shadow 1s;
     transition: text-shadow 1s;
-
 }
 
 div {
@@ -119,7 +125,7 @@ li:hover {
     left: 20px;
     border: 6px;
     width: 400px;
-    height: 450px;
+    height: 1000px;
     border-style: solid;
     border-image: linear-gradient(to bottom, #08295F, cyan, #001B30) 1;
     background: rgba(0, 0, 0, 0.3);
