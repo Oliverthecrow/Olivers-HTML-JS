@@ -1,0 +1,43 @@
+#Time {
+    position: absolute;
+    top: 50vh;
+    left: 42.5vw;
+    font-size: 70px;
+    color: black;
+    text-shadow: 5px 5px 40px black, -5px -5px 40px black;
+    -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+    -webkit-transition: text-shadow 1s;
+    -moz-transition: text-shadow 1s;
+    -ms-transition: text-shadow 1s;
+    -o-transition: text-shadow 1s;
+    transition: text-shadow 1s;
+}
+#Time:hover {
+    text-shadow: 2px 2px 15px gold, -2px -2px 15px gold;
+}
+#Time2 {
+    -webkit-transition: text-shadow 1s;
+    -moz-transition: text-shadow 1s;
+    -ms-transition: text-shadow 1s;
+    -o-transition: text-shadow 1s;
+    transition: text-shadow 1s;
+    position: absolute;
+    top: 50vh;
+    left: 42.5vw;
+    font-size: 70px;
+    color: white;
+    text-shadow: 5px 5px 40px white, -5px -5px  40px white;
+}
+#Time2:hover {
+    -webkit-transition: text-shadow 1s;
+    -moz-transition: text-shadow 1s;
+    -ms-transition: text-shadow 1s;
+    -o-transition: text-shadow 1s;
+    transition: text-shadow 1s;
+    text-shadow: 3px 3px 15px blue, -3px -3px 15px red;
+    color: purple;
+}

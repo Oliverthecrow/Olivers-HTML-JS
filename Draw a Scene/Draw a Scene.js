@@ -1,12 +1,10 @@
-let timer;
-
 let currentTime
 
 let night;
 let day;
 
 let randomcolorfill = false;
-let starR, starG, starB, starO;
+let starR, starG, starB, starO, starR2, starG2, starB2;
 
 let WIW = window.innerWidth
 let WIH = window.innerHeight
@@ -14,6 +12,7 @@ let WIH = window.innerHeight
 let stars = [];
 let clouds = [];
 let birds = [];
+let shootingstars = [];
 
 let moon = {
     d: 70,
@@ -34,6 +33,8 @@ function setup() {
     textAlign(CENTER);
     background(0);
     StarsFunction();
+    FallingStarFactory();
+    FallingStarProjectileLaunchingSystem();
     cloudmaking();
     birdfactory();
     drawstars();
@@ -53,7 +54,6 @@ function draw() {
     WIW = window.innerWidth;
     WIH = window.innerHeight;
 
-    timer = millis();
     moon.x = mouseX;
     moon.y = 300 - mouseX * 0.1;
 
@@ -63,24 +63,24 @@ function draw() {
     //makes opacity of stars change with position of moon/mouse.
     starO = mouseX / 5;
 
-    if (night) { background(5); drawstars(); moondrawing(); }
-    if (day) { background(80, 110, 200); clouddrawing(); sundrawing(); birddrawing();}
+    if (night) { background(5); drawstars(); moondrawing(); FallingStarProjectileLaunchingSystem(); }
+    if (day) { background(80, 110, 200); clouddrawing(); sundrawing(); birddrawing(); }
 
-    //displays clock in centre 
+    //checks time constantly
     currentTime = getCurrentTime();
-    fill(255);
-    textSize(60);
-    text(currentTime, width / 2, height / 2);
+    document.getElementById('Time').textContent = currentTime;
+    document.getElementById('Time2').textContent = currentTime;
 
     textSize(20);
-    text("It will automatically switch to night or day based on your time", window.innerWidth*0.852,window.innerHeight*0.94);
+    fill(255);
+    text("It will automatically switch to night or day based on your time", window.innerWidth * 0.852, window.innerHeight * 0.94);
     text("Press N or D to change day or night manually", window.innerWidth * 0.88, window.innerHeight * 0.97);
 
-    print(sunR);
+    TimerDisplay();
 }
 function StarsFunction() {
-    for (let starcount = 1; starcount <= 200; starcount++) {
-        //tends to give blues,reds, and purples, since it looks a lot better than a random sky. 
+    for (let starcount = 0; starcount <= 200; starcount++) {
+        //tends to give blues,reds, and purples, since it looks a lot better than a fully random sky. 
         starR = round(random(0, 255)); starG = round(random(0, 40)); starB = round(random(0, 255));
         stars.push({
             X: random(0, WIW),
@@ -92,7 +92,7 @@ function StarsFunction() {
         });
         randomcolorfill = false;
         if (starcount === 200) { setTimeout(StarsFunction, 5000); }
-        if (starcount === 1) { background(5); stars.splice(0); drawstars(); randomcolorfill = false; }
+        if (starcount === 0) { background(5); stars.splice(0); drawstars(); randomcolorfill = false; }
     }
 }
 function windowResized() {
@@ -117,6 +117,41 @@ function moondrawing() {
     circle(moon.x + moon.d * 0.1, moon.y - moon.d * 0.4, 15);
     fill(55);
     circle(moon.x + moon.d * 0.45, moon.y + moon.d * 0.35, 10);
+}
+//makes shooting stars
+function FallingStarFactory() {
+    for (let fallingstars = 0; fallingstars <= 5; fallingstars++) {
+        starR2 = round(random(0, 255)); starG2 = round(random(0, 40)); starB2 = round(random(0, 255));
+        shootingstars.push({
+            X: random(0, WIW),
+            Y: random(0, WIH),
+            D: random(7.5, 12.5),
+            R: starR2,
+            G: starG2,
+            B: starB2,
+            VY: random(-5, 9), //more likely to go down
+            VX: random(-7, 7),
+        })
+        if (fallingstars === 5) { setTimeout(FallingStarFactory, 6000); }
+        if (fallingstars === 0) { background(5); shootingstars.splice(0); }
+    }
+}
+//draws shooting stars and their trails 
+function FallingStarProjectileLaunchingSystem() {
+    shootingstars.forEach((shootingstars, index) => {
+        fill(shootingstars.R, shootingstars.G, shootingstars.B);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D);
+        shootingstars.X += shootingstars.VX
+        shootingstars.Y += shootingstars.VY
+
+        let trailLength = 10;
+        for (let trail = 0; trail < trailLength; trail++) {
+            let trailAlpha = map(trail, 0, trailLength - 1, 255, 0);
+            fill(shootingstars.R, shootingstars.G, shootingstars.B, trailAlpha);
+            let trailDiameter = map(trail, 0, trailLength - 1, shootingstars.D, shootingstars.D / 2);
+            circle(shootingstars.X - trail * shootingstars.VX, shootingstars.Y - trail * shootingstars.VY, trailDiameter);
+        }
+    });
 }
 //draws sun with glow that increases as it goes to the right
 function sundrawing() {
@@ -144,9 +179,9 @@ function cloudmaking() {
             VX: random(1, 1.5),
         })
         if (cloudamount === 10) { setTimeout(cloudmaking, 7000); }
-        if (cloudamount === 1) { clouds.splice(0); }
-        //this is for the sun, just using something that already resets every 7 seconds to do it.
-        sunR = round(random(200,255))
+        if (cloudamount === 0) { clouds.splice(0); }
+        //this is for the sun, just using something that already resets every 7 seconds to do it. it changes its color of orange 
+        sunR = round(random(200, 255))
     }
 }
 function clouddrawing() {
@@ -168,8 +203,8 @@ function birdfactory() {
             VY: random(-0.25, 0.75),
             VX: random(-1.5, 2.5),
         })
-        if (birdcount === 15) { setTimeout(birdfactory,14000) }
-        if (birdcount === 1) { birds.splice(0); }
+        if (birdcount === 15) { setTimeout(birdfactory, 14000) }
+        if (birdcount === 0) { birds.splice(0); }
     }
 }
 function birddrawing() {
@@ -180,8 +215,8 @@ function birddrawing() {
         stroke(255)
         strokeWeight(3)
         //the slighly off bird is intentional and makes it look like they are actually trying to "fly"
-        line(bird.X,bird.Y,bird.X+20,bird.Y+20) 
-        line(bird.X+20,bird.Y+20,bird.X+40,bird.Y+10)
+        line(bird.X, bird.Y, bird.X + 20, bird.Y + 20)
+        line(bird.X + 20, bird.Y + 20, bird.X + 40, bird.Y + 10)
         strokeWeight(1)
         stroke(0)
     });
@@ -190,18 +225,33 @@ function birddrawing() {
 // this takes your local time
 function getCurrentTime() {
     let now = new Date();
-    let hour = now.getHours();
     return now.toLocaleTimeString();
 }
 function checkdaystate() {
-    if (hour >= 6 || hour >= 18) { night = true; day = false; }
+    let now = new Date();
+    let hour = now.getHours();
+    console.log("Current hour:", hour);
+
+    if (hour <= 6 || hour >= 18) { night = true; day = false; }
     else { day = true; night = false }
 
-    //checks every two minutes 
-    setTimeout(checkdaystate, 120000);
+    console.log("Day:", day, "Night:", night);
+
+    //checks every thirty seconds 
+    setTimeout(checkdaystate, 3000);
 }
 //allows you to change the background from day to night
 function keyPressed() {
     if (key === "D" || key === "d") { day = true; night = false }
     if (key === "N" || key === "n") { night = true; day = false }
+}
+function TimerDisplay() {
+    if (day) {
+        document.getElementById("Time").style.display = 'block';
+        document.getElementById("Time2").style.display = "none";
+    }
+    if (night) {
+        document.getElementById("Time").style.display = 'none';
+        document.getElementById("Time2").style.display = "block";
+    }
 }
