@@ -228,7 +228,7 @@ function getCurrentTime() {
     return now.toLocaleTimeString();
 }
 function checkdaystate() {
-    let now = new Date();
+    let now = new Date
     let hour = now.getHours();
     console.log("Current hour:", hour);
 
@@ -238,7 +238,7 @@ function checkdaystate() {
     console.log("Day:", day, "Night:", night);
 
     //checks every thirty seconds 
-    setTimeout(checkdaystate, 3000);
+    setTimeout(checkdaystate, 30000);
 }
 //allows you to change the background from day to night
 function keyPressed() {
