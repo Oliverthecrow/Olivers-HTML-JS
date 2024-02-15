@@ -108,16 +108,16 @@ function drawstars() {
         circle(star.X, star.Y, star.D);
         //glow behind stars
         fill(star.R, star.G, star.B, 60);
-        circle(star.X, star.Y, star.D+10);
+        circle(star.X, star.Y, star.D + 10);
         fill(star.R, star.G, star.B, 30);
-        circle(star.X, star.Y, star.D+25);
+        circle(star.X, star.Y, star.D + 25);
     });
 }
 //draws the moon
 function moondrawing() {
     //glow behind
-    fill(160,160,160,90)
-    circle(moon.x, moon.y, moon.d+10);
+    fill(160, 160, 160, 90)
+    circle(moon.x, moon.y, moon.d + 10);
     //moon
     fill(120);
     circle(moon.x, moon.y, moon.d);
@@ -131,7 +131,7 @@ function moondrawing() {
 //makes shooting stars
 function FallingStarFactory() {
     for (let fallingstars = 0; fallingstars <= 5; fallingstars++) {
-        starR2 = round(random(0, 255)); starG2 = round(random(0, 100)); starB2 = round(random(0, 255));
+        starR2 = round(random(150, 255)); starG2 = round(random(150, 255)); starB2 = round(random(150, 255));
         shootingstars.push({
             X: random(0, WIW),
             Y: random(0, WIH),
@@ -139,10 +139,10 @@ function FallingStarFactory() {
             R: starR2,
             G: starG2,
             B: starB2,
-            VY: random(-5, 9), //more likely to go down
-            VX: random(-7, 7),
+            VY: random(-10, 15), //more likely to go down
+            VX: random(-12, 12),
         })
-        if (fallingstars === 5) { setTimeout(FallingStarFactory, 6000); }
+        if (fallingstars === 5) { setTimeout(FallingStarFactory, 5000); }
         if (fallingstars === 0) { background(5); shootingstars.splice(0); }
     }
 }
@@ -156,10 +156,10 @@ function FallingStarProjectileLaunchingSystem() {
         shootingstars.Y += shootingstars.VY
 
         //shooting star glow
-        fill(shootingstars.R, shootingstars.G, shootingstars.B,100);
-        circle(shootingstars.X, shootingstars.Y, shootingstars.D+15);
-        fill(shootingstars.R, shootingstars.G, shootingstars.B,60);
-        circle(shootingstars.X, shootingstars.Y, shootingstars.D,+25);
+        fill(shootingstars.R, shootingstars.G, shootingstars.B, 100);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D + 15);
+        fill(shootingstars.R, shootingstars.G, shootingstars.B, 60);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D, +25);
 
         //shooting star trail
         let trailLength = 10;
@@ -167,7 +167,7 @@ function FallingStarProjectileLaunchingSystem() {
             let trailAlpha = map(trail, 0, trailLength - 1, 255, 0);
             fill(shootingstars.R, shootingstars.G, shootingstars.B, trailAlpha);
             let trailDiameter = map(trail, 0, trailLength - 1, shootingstars.D, shootingstars.D / 2);
-            circle(shootingstars.X - trail * shootingstars.VX, shootingstars.Y - trail * shootingstars.VY, trailDiameter);
+            circle(shootingstars.X - trail * shootingstars.VX * 1.5, shootingstars.Y - trail * shootingstars.VY * 1.5, trailDiameter);
         }
     });
 }
