@@ -103,12 +103,22 @@ function drawstars() {
         //causes stars to vibrate, has a slight tendency to go downwards, why? cause I wanted them to :)
         star.Y += random(-0.5, 0.6);
         star.X += random(-0.3, 0.3);
+        //stars
         fill(star.R, star.G, star.B, starO);
         circle(star.X, star.Y, star.D);
+        //glow behind stars
+        fill(star.R, star.G, star.B, 60);
+        circle(star.X, star.Y, star.D+10);
+        fill(star.R, star.G, star.B, 30);
+        circle(star.X, star.Y, star.D+25);
     });
 }
 //draws the moon
 function moondrawing() {
+    //glow behind
+    fill(160,160,160,90)
+    circle(moon.x, moon.y, moon.d+10);
+    //moon
     fill(120);
     circle(moon.x, moon.y, moon.d);
     fill(50);
@@ -121,7 +131,7 @@ function moondrawing() {
 //makes shooting stars
 function FallingStarFactory() {
     for (let fallingstars = 0; fallingstars <= 5; fallingstars++) {
-        starR2 = round(random(0, 255)); starG2 = round(random(0, 40)); starB2 = round(random(0, 255));
+        starR2 = round(random(0, 255)); starG2 = round(random(0, 100)); starB2 = round(random(0, 255));
         shootingstars.push({
             X: random(0, WIW),
             Y: random(0, WIH),
@@ -139,11 +149,19 @@ function FallingStarFactory() {
 //draws shooting stars and their trails 
 function FallingStarProjectileLaunchingSystem() {
     shootingstars.forEach((shootingstars, index) => {
+        //shooting star
         fill(shootingstars.R, shootingstars.G, shootingstars.B);
         circle(shootingstars.X, shootingstars.Y, shootingstars.D);
         shootingstars.X += shootingstars.VX
         shootingstars.Y += shootingstars.VY
 
+        //shooting star glow
+        fill(shootingstars.R, shootingstars.G, shootingstars.B,100);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D+15);
+        fill(shootingstars.R, shootingstars.G, shootingstars.B,60);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D,+25);
+
+        //shooting star trail
         let trailLength = 10;
         for (let trail = 0; trail < trailLength; trail++) {
             let trailAlpha = map(trail, 0, trailLength - 1, 255, 0);
