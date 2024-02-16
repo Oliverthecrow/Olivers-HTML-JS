@@ -3,7 +3,7 @@ let currentTime
 let night;
 let day;
 
-let randomcolorfill = false;
+let RainbowStars = false;
 let starR, starG, starB, starO, starR2, starG2, starB2;
 
 let WIW = window.innerWidth
@@ -77,9 +77,10 @@ function draw() {
     text("Press N or D to change day or night manually", window.innerWidth * 0.88, window.innerHeight * 0.97);
 
     TimerDisplay();
+    print(frameRate())
 }
 function StarsFunction() {
-    for (let starcount = 0; starcount <= 200; starcount++) {
+    for (let starcount = 0; starcount <= 150; starcount++) {
         //tends to give blues,reds, and purples, since it looks a lot better than a fully random sky. 
         starR = round(random(0, 255)); starG = round(random(0, 40)); starB = round(random(0, 255));
         stars.push({
@@ -90,9 +91,8 @@ function StarsFunction() {
             G: starG,
             B: starB,
         });
-        randomcolorfill = false;
-        if (starcount === 200) { setTimeout(StarsFunction, 5000); }
-        if (starcount === 0) { background(5); stars.splice(0); drawstars(); randomcolorfill = false; }
+        if (starcount === 150) { setTimeout(StarsFunction, 5000); }
+        if (starcount === 0) { background(5); stars.splice(0); drawstars();}
     }
 }
 function windowResized() {
@@ -101,16 +101,19 @@ function windowResized() {
 function drawstars() {
     stars.forEach((star, index) => {
         //causes stars to vibrate, has a slight tendency to go downwards, why? cause I wanted them to :)
-        star.Y += random(-0.5, 0.6);
+        star.Y += random(-0.5, 0.7);
         star.X += random(-0.3, 0.3);
         //stars
         fill(star.R, star.G, star.B, starO);
         circle(star.X, star.Y, star.D);
         //glow behind stars
+        strokeWeight(0)
         fill(star.R, star.G, star.B, 60);
         circle(star.X, star.Y, star.D + 10);
         fill(star.R, star.G, star.B, 30);
         circle(star.X, star.Y, star.D + 25);
+        fill(star.R, star.G, star.B, 15)
+        circle(star.X, star.Y, star.D + 50);
     });
 }
 //draws the moon
@@ -131,7 +134,8 @@ function moondrawing() {
 //makes shooting stars
 function FallingStarFactory() {
     for (let fallingstars = 0; fallingstars <= 5; fallingstars++) {
-        starR2 = round(random(150, 255)); starG2 = round(random(150, 255)); starB2 = round(random(150, 255));
+        //gives more light colors to make the shooting stars pop out
+        starR2 = round(random(120, 255)); starG2 = round(random(120, 255)); starB2 = round(random(120, 255));
         shootingstars.push({
             X: random(0, WIW),
             Y: random(0, WIH),
@@ -145,21 +149,35 @@ function FallingStarFactory() {
         if (fallingstars === 5) { setTimeout(FallingStarFactory, 5000); }
         if (fallingstars === 0) { background(5); shootingstars.splice(0); }
     }
+    //chance per time shooting stars are made, to cause them to change color
+    RainbowStars = round(random(0, 10))
+    if (RainbowStars === 10) {RainbowStars = true;}
+    else {RainbowStars = false;}
 }
 //draws shooting stars and their trails 
 function FallingStarProjectileLaunchingSystem() {
     shootingstars.forEach((shootingstars, index) => {
         //shooting star
-        fill(shootingstars.R, shootingstars.G, shootingstars.B);
+        if (RainbowStars) {
+            fill(shootingstars.R, shootingstars.G, shootingstars.B)
+            shootingstars.R += 3; shootingstars.G += 1; shootingstars.B += 1; 
+            if (shootingstars.R >= 255) {shootingstars.R = 100}
+            else if (shootingstars.G >= 255) {shootingstars.G = 100;}
+            else if (shootingstars.B >= 255) {shootingstars.B = 100;}
+        }
+        else {fill(shootingstars.R, shootingstars.G, shootingstars.B);}
         circle(shootingstars.X, shootingstars.Y, shootingstars.D);
         shootingstars.X += shootingstars.VX
         shootingstars.Y += shootingstars.VY
 
         //shooting star glow
         fill(shootingstars.R, shootingstars.G, shootingstars.B, 100);
-        circle(shootingstars.X, shootingstars.Y, shootingstars.D + 15);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D + 10);
         fill(shootingstars.R, shootingstars.G, shootingstars.B, 60);
-        circle(shootingstars.X, shootingstars.Y, shootingstars.D, +25);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D + 20);
+        fill(shootingstars.R, shootingstars.G, shootingstars.B, 15);
+        circle(shootingstars.X, shootingstars.Y, shootingstars.D + 40);
+
 
         //shooting star trail
         let trailLength = 10;
@@ -194,18 +212,23 @@ function cloudmaking() {
             B: cloudB,
             O: cloudO,
             VY: random(0.1, 0.25),
-            VX: random(1, 1.5),
+            VXright: random(1, 1.5),
+            VXleft: random(-1.5, -1),
         })
         if (cloudamount === 10) { setTimeout(cloudmaking, 7000); }
         if (cloudamount === 0) { clouds.splice(0); }
         //this is for the sun, just using something that already resets every 7 seconds to do it. it changes its color of orange 
         sunR = round(random(200, 255))
     }
+    wind = round(random(0, 1))
+    if (wind === 0) { wind = "left" }
+    if (wind === 1) { wind = "right" }
 }
 function clouddrawing() {
     clouds.forEach((cloud, index) => {
         cloud.Y += cloud.VY;
-        cloud.X += cloud.VX;
+        if (wind === "right") { cloud.X += cloud.VXright; }
+        if (wind === "left") { cloud.X += cloud.VXleft }
         fill(cloud.R, cloud.G, cloud.B, cloud.O);
         ellipse(cloud.X, cloud.Y, cloud.W, cloud.H);
     });
@@ -217,9 +240,9 @@ function birdfactory() {
         birds.push({
             X: birdx,
             Y: birdy,
-            //birds are more likely to go to the right, following the wind
+            //more likely to go down
             VY: random(-0.25, 0.75),
-            VX: random(-1.5, 2.5),
+            VX: random(-2.5, 2.5),
         })
         if (birdcount === 15) { setTimeout(birdfactory, 14000) }
         if (birdcount === 0) { birds.splice(0); }
