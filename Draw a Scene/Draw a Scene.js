@@ -5,6 +5,9 @@ let day;
 
 let RainbowStars = false;
 let starR, starG, starB, starO, starR2, starG2, starB2;
+let GradientR = 227;
+let GradientG = 91;
+let GradientB = 134;
 
 let WIW = window.innerWidth
 let WIH = window.innerHeight
@@ -64,7 +67,18 @@ function draw() {
     starO = mouseX / 5;
 
     if (night) { background(5); drawstars(); moondrawing(); FallingStarProjectileLaunchingSystem(); }
-    if (day) { background(80, 110, 200); clouddrawing(); sundrawing(); birddrawing(); }
+    if (day) {
+        for (let y = 0; y < WIH; y++) {
+            let bottomColor = color(245, 113, 168)
+            let topColor = color(237, 169, 109)
+            let lineColor = lerpColor(topColor, bottomColor, y / WIH);
+
+            stroke(lineColor);
+            line(0, y, WIW, y);
+        }
+        stroke(0);
+        clouddrawing(); sundrawing(); birddrawing();
+    }
 
     //checks time constantly
     currentTime = getCurrentTime();
@@ -73,11 +87,11 @@ function draw() {
 
     textSize(20);
     fill(255);
-    text("It will automatically switch to night or day based on your time", window.innerWidth * 0.852, window.innerHeight * 0.94);
-    text("Press N or D to change day or night manually", window.innerWidth * 0.88, window.innerHeight * 0.97);
+    text("It will automatically switch to night or day based on your time", window.innerWidth * 0.83, window.innerHeight * 0.94);
+    text("Press N or D to change day or night manually", window.innerWidth * 0.87, window.innerHeight * 0.97);
 
     TimerDisplay();
-    print(frameRate())
+    //print(frameRate()) remove comment to check framerate
 }
 function StarsFunction() {
     for (let starcount = 0; starcount <= 150; starcount++) {
@@ -86,13 +100,13 @@ function StarsFunction() {
         stars.push({
             X: random(0, WIW),
             Y: random(0, WIH),
-            D: 7.5,
+            D: random(4,8.5),
             R: starR,
             G: starG,
             B: starB,
         });
         if (starcount === 150) { setTimeout(StarsFunction, 5000); }
-        if (starcount === 0) { background(5); stars.splice(0); drawstars();}
+        if (starcount === 0) { stars.splice(0); drawstars(); }
     }
 }
 function windowResized() {
@@ -109,11 +123,13 @@ function drawstars() {
         //glow behind stars
         strokeWeight(0)
         fill(star.R, star.G, star.B, 60);
-        circle(star.X, star.Y, star.D + 10);
+        circle(star.X, star.Y, star.D * 2);
         fill(star.R, star.G, star.B, 30);
-        circle(star.X, star.Y, star.D + 25);
+        circle(star.X, star.Y, star.D * 2.85);
         fill(star.R, star.G, star.B, 15)
-        circle(star.X, star.Y, star.D + 50);
+        circle(star.X, star.Y, star.D * 3.5);
+        fill(star.R, star.G, star.B, 7.5)
+        circle(star.X, star.Y, star.D * 7);
     });
 }
 //draws the moon
@@ -143,16 +159,17 @@ function FallingStarFactory() {
             R: starR2,
             G: starG2,
             B: starB2,
-            VY: random(-10, 15), //more likely to go down
-            VX: random(-12, 12),
+            //speeds will vary based on framerate, so if they look really fast/really slow, that would be why
+            VY: random(-7, 12), //more likely to go down
+            VX: random(-8, 8),
         })
         if (fallingstars === 5) { setTimeout(FallingStarFactory, 5000); }
         if (fallingstars === 0) { background(5); shootingstars.splice(0); }
     }
     //chance per time shooting stars are made, to cause them to change color
     RainbowStars = round(random(0, 10))
-    if (RainbowStars === 10) {RainbowStars = true;}
-    else {RainbowStars = false;}
+    if (RainbowStars === 10) { RainbowStars = true; }
+    else { RainbowStars = false; }
 }
 //draws shooting stars and their trails 
 function FallingStarProjectileLaunchingSystem() {
@@ -160,12 +177,12 @@ function FallingStarProjectileLaunchingSystem() {
         //shooting star
         if (RainbowStars) {
             fill(shootingstars.R, shootingstars.G, shootingstars.B)
-            shootingstars.R += 3; shootingstars.G += 1; shootingstars.B += 1; 
-            if (shootingstars.R >= 255) {shootingstars.R = 100}
-            else if (shootingstars.G >= 255) {shootingstars.G = 100;}
-            else if (shootingstars.B >= 255) {shootingstars.B = 100;}
+            shootingstars.R += 3; shootingstars.G += 1; shootingstars.B += 1;
+            if (shootingstars.R >= 255) { shootingstars.R = 100 }
+            else if (shootingstars.G >= 255) { shootingstars.G = 100; }
+            else if (shootingstars.B >= 255) { shootingstars.B = 100; }
         }
-        else {fill(shootingstars.R, shootingstars.G, shootingstars.B);}
+        else { fill(shootingstars.R, shootingstars.G, shootingstars.B); }
         circle(shootingstars.X, shootingstars.Y, shootingstars.D);
         shootingstars.X += shootingstars.VX
         shootingstars.Y += shootingstars.VY
