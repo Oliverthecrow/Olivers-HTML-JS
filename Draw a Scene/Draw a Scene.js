@@ -53,24 +53,52 @@ function setup() {
 }
 
 function draw() {
-    //resets dimensions of page, this is incase you open the console every stops being put at the top of the page. 
+    //resets dimensions of page, this is incase you open the console.
     WIW = window.innerWidth;
     WIH = window.innerHeight;
 
     moon.x = mouseX;
-    moon.y = 300 - mouseX * 0.1;
+    if (mouseX >= WIW / 2) { moon.y = WIH / 8.5 + mouseX * 0.2; }
+    else if (mouseX <= WIW / 2) { moon.y = WIH / 2 - mouseX * 0.2; }
 
     sun.x = mouseX;
-    sun.y = 300 - mouseX * 0.1;
+    if (mouseX >= WIW / 2) { sun.y = WIH / 8.5 + mouseX * 0.2; }
+    else if (mouseX <= WIW / 2) { sun.y = WIH / 2 - mouseX * 0.2; }
 
     //makes opacity of stars change with position of moon/mouse.
     starO = mouseX / 5;
 
-    if (night) { background(5); drawstars(); moondrawing(); FallingStarProjectileLaunchingSystem(); }
+    strokeWeight(1);
+    //gradient backgrounds for night and day
+    if (night) {
+        for (let y = 0; y < WIH; y++) {
+            let bottomColor, topColor;
+            if (mouseX < WIW / 2) {
+                bottomColor = color(25, 4, 11)
+                topColor = color(5, 2, 15)
+            }
+            else {
+                bottomColor = color(19, 2, 23);
+                topColor = color(5, 0, 10);
+            }
+            let lineColor = lerpColor(topColor, bottomColor, y / WIH);
+
+            stroke(lineColor);
+            line(0, y, WIW, y);
+        }
+        stroke(0)
+        drawstars(); moondrawing(); FallingStarProjectileLaunchingSystem();
+    }
     if (day) {
         for (let y = 0; y < WIH; y++) {
-            let bottomColor = color(245, 113, 168)
-            let topColor = color(237, 169, 109)
+            let bottomColor, topColor;
+            if (mouseX > WIW / 2) {
+                bottomColor = color(245, 113, 168);
+                topColor = color(48, 34, 79);
+            } else {
+                bottomColor = color(230, 82, 37);
+                topColor = color(235, 144, 70);
+            }
             let lineColor = lerpColor(topColor, bottomColor, y / WIH);
 
             stroke(lineColor);
@@ -100,7 +128,7 @@ function StarsFunction() {
         stars.push({
             X: random(0, WIW),
             Y: random(0, WIH),
-            D: random(4,8.5),
+            D: random(4, 8.5),
             R: starR,
             G: starG,
             B: starB,
@@ -164,7 +192,7 @@ function FallingStarFactory() {
             VX: random(-8, 8),
         })
         if (fallingstars === 5) { setTimeout(FallingStarFactory, 5000); }
-        if (fallingstars === 0) { background(5); shootingstars.splice(0); }
+        if (fallingstars === 0) { shootingstars.splice(0); }
     }
     //chance per time shooting stars are made, to cause them to change color
     RainbowStars = round(random(0, 10))
