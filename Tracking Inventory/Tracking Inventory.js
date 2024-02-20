@@ -72,6 +72,7 @@ function scene3() {
     textSize(40);
     text("Along your journey, you run into a aggresive zombie, \n you manage to fend it off with your shield, unfortunately breaking it in the process",WIW/2,WIH/2);
 
+    //gets rid of shield
     if(!InventoryGiven) {inventory.splice(2, 1); InventoryGiven = true;}
 
 }
@@ -79,6 +80,7 @@ function scene4() {
     textSize(40);
     text("Your Stomach grumbles, you enter an abandoned restaurant and gather some supplies",WIW/2,WIH/2);
 
+    //adds food near start of inventory
     if(!InventoryGiven) {inventory.splice(1,0,"Food","Food"); InventoryGiven = true;}
 
 }
@@ -94,24 +96,28 @@ function scene6() {
     textSize(40);
     text("You come accross a cabin in the woods with a key close to the front door, \n seeing the glow of a small town in the distance, you pick up the key",WIW/2,WIH/2);
 
+    //gives player key
     if(!InventoryGiven) {inventory.push("Key") ; InventoryGiven = true;};
 }
 function scene7() {
     textSize(40);
     text("You go to the town and meet a blacksmith, who is selling a magical sword for only 5 coins.",WIW/2,WIH/2);
 
+    //gives sword
     if(!InventoryGiven) {coins -= 5 /*price of sword*/; inventory.splice(6,1,coins,"Sword") ; InventoryGiven = true;};
 }
 function scene8() {
     textSize(40);
     text("You got back to your new found cabin, and drink your remaining water before going to sleep",WIW/2,WIH/2);
 
+    //gets rid of water
     if(!InventoryGiven) {inventory.splice(0,1) ; InventoryGiven = true;};
 }
 function scene9() {
     textSize(40);
     text("Back in the town in the morning some crazed man runs up to you, \n and says after looking around suspicously, if you want to buy his potion, \n a very dark red potion, with a small amount of brownish red gas waiting to escape the bottle \n Press Y to buy, or click to ignore",WIW/2,WIH/2);
 
+    //gives potion if you choose to buy it and gets rid of coins if you did buy
     if(key === "y" || key === "Y") {
     if(!InventoryGiven) {inventory.splice(0,0,"Potion"); inventory.splice(6,1); InventoryGiven = true;};coins = 0; GotPotion = true;}
 }
@@ -120,7 +126,8 @@ function scene10() {
     if(GotPotion) {text("The Queen zombie, the reason for the apocalypse approaches you, \n fighting her with your new magical sword, you get flung to the ground, \n very injured, you drink your potion, and Win the battle,",WIW/2,WIH/2);}
     else{text("The Queen zombie, the reason for the apocalypse approaches you, \n fighting her with your new magical sword, you get flung to the ground, \n very injured, you are not able to get up, and the Queen escapes",WIW/2,WIH/2)}
 
-    if(!InventoryGiven) {inventory.splice(0,1); InventoryGiven = true;};
+    //gets rid of potion
+    if(GotPotion) {if(!InventoryGiven) {inventory.splice(0,1); InventoryGiven = true;}}
 }
 function scene11() {
     textSize(40)
@@ -135,7 +142,7 @@ function keyPressed() {
 }
 //resizes window
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+    resizeCanvas(WIW, WIH);
 }
 function preLoad() {
     loadImage("good ending background.jpg");
