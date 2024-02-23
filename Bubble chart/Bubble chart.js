@@ -17,35 +17,36 @@ function draw() {
     stroke(60);
 
     //america circle
+    let Scale = 100000000
     fill(200, 80, 120);                         //size scale 100 mil
-    circle(7.66 * WIW * 0.12, WIH * 0.520, 20 * 332000000 / 100000000);
+    circle(7.66 * WIW * 0.12, WIH * 0.520, 20 * 332000000 / Scale);
     textSize(15)
     fill(0);
     text(Countries[0], 7.66 * WIW * 0.12, WIH * 0.48)
 
     //canada circle
     fill(80, 120, 200);
-    circle(0.8 * WIW * 0.12, WIH * 0.35, 20 * 38000000 / 100000000)
+    circle(0.8 * WIW * 0.12, WIH * 0.35, 20 * 38000000 / Scale)
     fill(0)
     text(Countries[1], 0.8 * WIW * 0.12, WIH * 0.33)
 
     //mexico circle
     fill(120, 180, 140);
-    circle(0.725 * WIW * 0.12, WIH * 0.8, 20 * 127000000 / 100000000);
+    circle(0.725 * WIW * 0.12, WIH * 0.8, 20 * 127000000 / Scale);
     fill(0);
     text(Countries[2], 0.725 * WIW * 0.12, WIH * 0.77)
 
     //britian circle
     fill(200,30,130);
-    circle(1.05 * WIW * 0.12, WIH * 0.37, 20 * 67000000/100000000);
+    circle(1.05 * WIW * 0.12, WIH * 0.37, 20 * 67000000/Scale);
     fill(0)
     text(Countries[3],1.05 * WIW * 0.12, WIH * 0.35)
 
     //china circle
     fill(190, 130, 130);
-    circle(5.8 * WIW * 0.12,WIH * 0.53, 20 * 1400000000/100000000);
+    circle(5.8 * WIW * 0.12,WIH * 0.49, 20 * 1400000000/Scale);
     fill(0)
-    text(Countries[4],5.8 * WIW * 0.12,WIH * 0.38)
+    text(Countries[4],5.8 * WIW * 0.12,WIH * 0.33)
 
     for (info = 0; info < 5; info++) {
         textSize(12)
@@ -83,7 +84,7 @@ function draw() {
 
     //fun fact: ach pixel in graph is equal to 14511041009.5 USD of GDP
 
-    text("Size is based on population size, Diamater = Popluation/100 mil", WIW / 2, WIH * 0.05)
+    text("Size is based on population size, Diamater = 20 * (Popluation/100 mil)", WIW / 2, WIH * 0.05)
     text("Life Expectancy vs GDP",WIW/2,WIH*0.14)
 }
 function mousePressed() {
