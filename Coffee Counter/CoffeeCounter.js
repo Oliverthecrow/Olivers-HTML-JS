@@ -19,7 +19,7 @@ let weekdone = false;
 let Coffee = ["Pistachio Latte", "Gingerbread Latte", "Sugar Cookie Oat Latte", "Chestnut Praline Latte", "Caramel Brule Latte", "Oat Latte", "Vanilla Latte", "Caffe Latte", "Cinnamon Dolce Latte"]
 let Calories = [400, 380, 340, 410, 500, 240, 320, 250, 420]
 let Fat = [11, 16, 10, 16, 15, 11, 9, 9, 16] //in grams
-let Caffein = [150, 150, 150, 150, 150, 150, 150, 150, 150] //in milligrams assumes that their esspesso shots are 75 milligrams
+let Caffein = [150, 150, 150, 150, 150, 150, 150, 150, 150] //in milligrams assumes that their esspesso shots are 75 milligrams, and yes, all of them are the same
 //all coffees assume 591ml of liquid, the largest size at starbucks
 function setup() {
     let canvas = createCanvas(WIW, WIH)
@@ -42,7 +42,10 @@ function draw() {
     textSize(40)
     text("Week " + week, WIW * 0.05, WIH * 0.95)
     textSize(20)
-    if(weekdone){text("Info for this week \n" + "Calories Consumed " + CaloriesConsumed + "  Fat Consumed " + FatConsumed + "g\n  Caffein Consumed " + CaffeinConsumed + "mg" + "  Amount of coffees " + AMTofCoffes, WIW * 0.25, WIH * 0.925)}
+    if(weekdone){
+        text("Info for this week \n" + "Calories Consumed " + CaloriesConsumed + "  Fat Consumed " + FatConsumed + "g\n  Caffein Consumed " + CaffeinConsumed + "mg" + "  Amount of coffees " + AMTofCoffes, WIW * 0.25, WIH * 0.925);
+        text("Average Caffein: " + round(CaffeinConsumed/AMTofCoffes) + " Average Fat: " + round(FatConsumed/AMTofCoffes) + " Average Calories: " + round(CaloriesConsumed/AMTofCoffes),WIW*0.75,WIH*0.975)
+    }
 
     if (searched && !nodrink && !statgiven) {
         CaloriesConsumed += Calories[i]; 
