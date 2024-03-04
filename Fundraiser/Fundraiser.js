@@ -61,5 +61,5 @@ function draw() {
     text(People[randomperson] + " was randomly chosen to get a door prize",WIW*0.7,WIH*0.8);
 }
 function mousePressed() {
-    randomperson = round(random(0,10));
+    randomperson = round(random(0,9));
 }
