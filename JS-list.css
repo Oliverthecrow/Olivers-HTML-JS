@@ -16,7 +16,7 @@ li {
     top: -800px;
     width: 400px;
     height: 50px;
-    left: 40px;
+    left: 50px;
     -webkit-transition: color 1s;
     -moz-transition: color 1s;
     -ms-transition: color 1s;
@@ -125,7 +125,7 @@ li:hover {
     left: 20px;
     border: 6px;
     width: 400px;
-    height: 1500px;
+    height: 1800px;
     border-style: solid;
     border-image: linear-gradient(to bottom, #08295F, cyan, #001B30) 1;
     background: rgba(0, 0, 0, 0.3);
