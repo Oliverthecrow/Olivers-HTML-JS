@@ -51,7 +51,7 @@ function subract(firstnumber) {
 function multiply(firstnumber) {
     let tempTotal = 0;
     let secondnumber = 1.0* window.prompt("What number do you want to multiply by");
-    tempTotal - firstnumber * secondnumber;
+    tempTotal = firstnumber * secondnumber;
     return tempTotal
 }
 function power(firstnumber) {
